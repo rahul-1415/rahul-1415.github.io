@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rahul Babu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='220 0 16 16%22'><text y='2214'22 font-size=`2216`22>😊</text></svg>">
+
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: "Gochi Hand", cursive;
+            background-color: #121212;
+            color: #efe6dd;
+            font-size: 20px;
+            background-image: radial-gradient(#212121 2.5px, transparent 1px), radial-gradient(#121215 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+
+        header {
+            background-color: #121212;
+            color: #efe6dd;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-family: 'Gochi Hand', cursive;
+            font-size: 80px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 1rem;
+        }
+
+        nav ul li a {
+            color: #efe6dd;
+            text-decoration: none;
+        }
+
+        .container {
+            padding: 2rem;
+            margin: 1rem auto;
+            max-width: 800px;
+            background: rgba(18, 18, 18, 0.8); /* Darker background with transparency */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+        }
+
+        section h2 {
+            margin-top: 0;
+        }
+
+        .project-box, .experience-box {
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            background: rgba(18, 18, 18, 0.8); /* Darker background with transparency */
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .experience-header, .role-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .experience-header h3, .role-header h3 {
+            margin: 0;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-family: "Gochi Hand", cursive;
+            font-size : 15px;
+        }
+
+        .skill-button, .link-button {
+            background-color: #fff;
+            color: #121212;
+            border: none;
+            padding: 0.25rem 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-family: "Gochi Hand", cursive;
+            font-size: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #121212;
+            color: #efe6dd;
+        }
+            #backToTopBtn {
+                display: none; /* Hidden by default */
+                position: fixed; /* Fixed position */
+                bottom: 20px; /* Place the button at the bottom */
+                right: 30px; /* Place the button 30px from the right */
+                z-index: 99; /* Make sure it does not overlap */
+                border: none; /* Remove borders */
+                outline: none; /* Remove outline */
+                background-color: #fff; /* Set a white background color */
+                color: #000; /* Set the arrow color to black */
+                cursor: pointer; /* Add a mouse pointer on hover */
+                padding: 15px; /* Some padding */
+                border-radius: 50%; /* Rounded corners to make it a circle */
+                font-size: 18px; /* Increase font size */
+            }
+        
+            #backToTopBtn:hover {
+                background-color: #f1f1f1; /* Add a light-grey background on hover */
+            }
+
+        /* Custom Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #121212; /* Background color of the scrollbar track */
+            border-radius: 10px; /* Rounded corners for the track */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #efe6dd; /* Color of the scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the thumb */
+            border: 3px solid #121212; /* Adds space around the thumb */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4c4b8; /* Color of the scrollbar thumb on hover */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Rahul Babu</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Work Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>
+                Hello! </p><p>I am Rahul Babu, Software Engineer with 4+ years of experience in AI/ML engineering, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.
+            </p>
+            <p>
+                At BlackRock, I developed FastAPI-based portfolio & risk APIs, an LLM research assistant (LangChain + OpenAI), and AWS Glue/S3 data pipelines, cutting response times by 75% and saving 15+ analyst hours weekly.
+            </p>
+            <p>
+                Previously at Vivma Software, I engineered Flask/Django APIs, optimized ETL pipelines on 20M+ rows, and built a scikit-learn recommendation engine that boosted upsell conversions by 11%.
+            </p>
+            <p>
+                Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
+            </p>
+            <a href="https://github.com/rahul-1415" class="link-button">GitHub</a>
+            <a href="https://www.linkedin.com/in/rahulb1407/" class="link-button">LinkedIn</a>
+        </div>
+    </section>
+
+    <section id="experience">
+        <div class="container">
+            <h2>Work Experience</h2>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>BlackRock</h3>
+                    <p>USA</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>Software Engineer</strong></p>
+                    <p>July 2024 - Present</p>
+                </div>
+                <ul>
+                    <li>Engineered Python RESTful APIs (FastAPI) to deliver real-time portfolio and risk data; processed 5M+ daily records with optimized queries, cutting average response time from 8s to 2s during trading hours.</li>
+                    <li>Built an LLM-powered research assistant using LangChain + OpenAI models to summarize earnings transcripts and analyst notes; reduced manual review effort for portfolio managers by ~15 hours each week.</li>
+                    <li>Designed a React.js dashboard that integrated live fund inflow/outflow trends, anomaly alerts, and LLM-generated market insights; adoption by 20+ analysts replaced static Excel workflows.</li>
+                    <li>Automated ingestion and enrichment of Bloomberg/Refinitiv feeds through AWS Glue, S3, and Lambda triggers; ensured 100% SLA adherence and eliminated manual data preparation steps.</li>
+                    <li>Deployed containerized microservices with Docker + AWS ECS, wired CI/CD via GitHub Actions, and introduced monitoring through CloudWatch; achieved less than 10 min release cycles with zero downtime.</li>
+                    <li>Implemented an NLP + LangGraph pipeline for entity extraction and context mapping across 100K+ SEC filings; compliance teams accelerated audit prep by 40% while cutting false positives in alerts.</li>
+                </ul>
+            </div>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>Vivma Software Inc.</h3>
+                    <p>India</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>Software Engineer</strong></p>
+                    <p>June 2021 - July 2023</p>
+                </div>
+                <ul>
+                    <li>Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews; reduced schema-change overhead while keeping financial data ACID-compliant.</li>
+                    <li>Built Flask APIs for checkout, refunds, and shipment events; wrapped 200+ test cases in pytest, reaching 85% coverage and minimizing regression bugs.</li>
+                    <li>Orchestrated ETL pipelines in Python (pandas + SQLAlchemy + PyMongo) to merge order history with review sentiment data; optimized pipeline runtime by 40% on 20M+ rows + 5M+ docs.</li>
+                    <li>Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and cutting ops team effort by 12 hours/week.</li>
+                    <li>Created a React.js customer portal for browsing catalogs and personalized deals; integrated cache + lazy loading to reduce page load time by 35%.</li>
+                    <li>Trained a scikit-learn recommendation engine combining transactional (Postgres) and behavioral (MongoDB) data; boosted upsell conversion rate by 11% in pilot.</li>
+                    <li>Containerized services with Docker, deployed on AWS (EC2, RDS, S3, DocumentDB for Mongo), and configured monitoring via CloudWatch for stable performance under seasonal traffic spikes.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <h2>Skills</h2>
+            <div class="skills">
+                <button class="skill-button">Python (Pandas, NumPy, Async Programming)</button>
+                <button class="skill-button">Django</button>
+                <button class="skill-button">Flask</button>
+                <button class="skill-button">FastAPI</button>
+                <button class="skill-button">RESTful API Development</button>
+                <button class="skill-button">Microservices</button>
+                <button class="skill-button">Scalability</button>
+                <button class="skill-button">Database Management (SQL, PostgreSQL, MySQL)</button>
+                <button class="skill-button">Angular</button>
+                <button class="skill-button">React</button>
+                <button class="skill-button">TypeScript</button>
+                <button class="skill-button">HTML5</button>
+                <button class="skill-button">CSS3</button>
+                <button class="skill-button">JavaScript (ES6+)</button>
+                <button class="skill-button">State Management</button>
+                <button class="skill-button">Component Architecture</button>
+                <button class="skill-button">Lazy Loading</button>
+                <button class="skill-button">Node.js & Express</button>
+                <button class="skill-button">GraphQL</button>
+                <button class="skill-button">API Integration</button>
+                <button class="skill-button">Responsive UI Design</button>
+                <button class="skill-button">Webpack</button>
+                <button class="skill-button">LLM Development (GPT-4, LLaMA)</button>
+                <button class="skill-button">LangChain</button>
+                <button class="skill-button">RAG Frameworks</button>
+                <button class="skill-button">Prompt Engineering & Optimization</button>
+                <button class="skill-button">TensorFlow</button>
+                <button class="skill-button">PyTorch</button>
+                <button class="skill-button">Scikit-learn</button>
+                <button class="skill-button">XGBoost</button>
+                <button class="skill-button">Hugging Face Transformers</button>
+                <button class="skill-button">spaCy (NLP)</button>
+                <button class="skill-button">AWS</button>
+                <button class="skill-button">Data Pipelines (ETL, Ingestion, Validation, Warehousing, Transformation)</button>
+                <button class="skill-button">Data Lake</button>
+                <button class="skill-button">Data Governance & Quality</button>
+                <button class="skill-button">Git/GitHub/GitLab</button>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Forest Monitoring using Hyperspectral Imaging</h3>
+                    <p><strong>Nov 2022 - May 2023</strong></p>
+                </div>
+                <p>This project focuses on utilizing hyperspectral imaging for forest terrain monitoring, aiming to provide detailed insights into forest contents and potential risks. It utilizes the Indian Pines dataset, which captures hyperspectral data from a forested area, and employs a hybrid classification method, including Support Vector Machines (SVM), 2D Convolutional Neural Networks (CNN), 3D CNN, M3D-CNN, SSRN, and a Hybrid model for precise forest analysis.</p>
+                <ul>
+                    <li>Utilized Indian Pines dataset for hyperspectral imaging.</li>
+                    <li>Employed hybrid classification methods combining SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.</li>
+                    <li>Provided comprehensive insights including vegetation cover percentage, building presence, and hazard detection.</li>
+                </ul>
+                <p class="skill-button">Scikit-Learn</p>
+                <p class="skill-button">Machine Learning</p>
+                <p class="skill-button">TensorFlow</p>
+                <p class="skill-button">Exploratory Data Analysis</p>
+                <p class="skill-button">NumPy</p>
+                <p class="skill-button">Data Science</p>
+                <p class="skill-button">Data Analysis</p>
+                <p class="skill-button">Python</p>
+                <p class="skill-button">Pandas</p>
+
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>IoT Device Manager using Blockchain</h3>
+                    <p><strong>Jan 2023 - May 2023</strong></p>
+                </div>
+                <p>This project focuses on establishing a robust and secure framework for the management of IoT devices, underpinned by the principles of data immutability and transparency, all facilitated by the innovative use of blockchain technology.</p>
+                <ul>
+                    <li>Implemented a blockchain-based solution for IoT device management.</li>
+                    <li>Recorded critical transactions including device registration, management, and ownership transfers.</li>
+                    <li>Developed a user-friendly web application using ReactJS.</li>
+                </ul>
+                <p class="skill-button">MetaMask</p>
+                <p class="skill-button">Truffle Framework</p>
+                <p class="skill-button">Ganache</p>
+                <p class="skill-button">Solidity</p>
+                <p class="skill-button">React.js</p>
+
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Web Phishing Detection</h3>
+                    <p><strong>Aug 2022 - Nov 2022</strong></p>
+                </div>
+                <p>The Web Phishing Detection project is a Python-based solution deployed on the IBM Cloud platform, focused on the detection of phishing websites. It incorporates machine learning techniques to enhance accuracy.</p>
+                <ul>
+                    <li>Trained 10 machine learning models for phishing detection.</li>
+                    <li>Deployed the highest accuracy model on IBM Cloud.</li>
+                    <li>Developed a website interface for user interaction with the phishing detection system.</li>
+                </ul>
+                <p class="skill-button"> Machine Learning</p>
+                <p class="skill-button"> Exploratory Data Analysis</p>
+                <p class="skill-button"> Data Science</p>
+                <p class="skill-button"> Data Analysis</p>
+                <p class="skill-button"> Python</p>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Path Navigation using Deep Q Learning</h3>
+                    <p><strong>Jan 2022 - Sep 2022</strong></p>
+                </div>
+                <p>An application developed using Kivy and PyTorch Framework. The application simulates an autonomous vehicle navigating a map I designed, complete with manually placed obstacles.</p>
+                <ul>
+                    <li>Used Deep Q Networks (DQNs) with relu activation functions for navigation.</li>
+                    <li>Designed a reward system to improve obstacle avoidance capabilities.</li>
+                    <li>Received approval for publication in ADCOM Volume 133.</li>
+                </ul>
+                <p class = "skill-button"> Machine Learning</p>
+                <p class = "skill-button"> NumPy</p>
+                <p class = "skill-button"> Python</p>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Tournament Manager</h3>
+                    <p><strong>Jul 2021 - Nov 2021</strong></p>
+                </div>
+                <p>The Tournament Manager is a Java-based application designed to facilitate the efficient organization of sports tournaments.</p>
+                <ul>
+                    <li>Designed and configured tournaments for different divisions and sports.</li>
+                    <li>Streamlined team enrollment and player information updates.</li>
+                    <li>Developed using Java and MySQL.</li>
+                </ul>
+                <p class="skill-button"> Java</p>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Harmful Comments Classifier</h3>
+                    <p><strong>Jan 2021 - Apr 2021</strong></p>
+                </div>
+                <p>The "Harmful Comments Classifier" is a Python-based Natural Language Processing (NLP) project, executed within the Google Colab environment.</p>
+                <ul>
+                    <li>Developed a deep learning model for classifying comments based on toxicity.</li>
+                    <li>Utilized embedding techniques, bi-directional LSTM, and dense models.</li>
+                    <li>Executed within the Google Colab environment.</li>
+                </ul>
+                <p class="skill-button"> Machine Learning</p>
+                <p class="skill-button"> Exploratory Data Analysis</p>
+                <p class="skill-button"> Data Science</p>
+                <p class="skill-button"> Data Analysis</p>
+                <p class="skill-button"> Python</p>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>EATERIO</h3>
+                    <p><strong>Jan 2020 - May 2020</strong></p>
+                </div>
+                <p>"EATERIO" is a web application built using HTML, CSS, JavaScript, and MongoDB, designed to facilitate food ordering and management within organizations.</p>
+                <ul>
+                    <li>Streamlined the food ordering process within organizations.</li>
+                    <li>Developed using HTML, CSS, JavaScript, and MongoDB.</li>
+                    <li>Provided a user-friendly interface for placing and managing food orders.</li>
+                </ul>
+                <p class="skill-button"> HTML</p>
+                <p class="skill-button"> CSS</p>
+                <p class="skill-button"> JavaScript</p>
+                <p class="skill-button"> MongoDB</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact</h2>
+            <p><i class="fas fa-envelope"></i> 
+                <a href="mailto:rahulb1407@gmail.com" style="color: #fff;">rahulb1407@gmail.com</a></p>
+        </div>
+    </section>
+
+        <button onclick="topFunction()" id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+    <footer>
+        <p>&copy; 2024 Rahul Babu</p>
+    </footer>
+
+    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+<df-messenger
+  project-id="rahul-babu-chatbot"
+  agent-id="fb338710-7a86-44cb-8faf-828277158598"
+  language-code="en"
+  max-query-length="-1">
+  <df-messenger-chat-bubble
+    chat-title="rahul-babu-chat-agent">
+  </df-messenger-chat-bubble>
+</df-messenger>
+<style>
+  df-messenger {
+    z-index: 999;
+    position: fixed;
+    --df-messenger-font-color: #000;
+    --df-messenger-font-family: Google Sans;
+    --df-messenger-chat-background: #f3f6fc;
+    --df-messenger-message-user-background: #d3e3fd;
+    --df-messenger-message-bot-background: #fff;
+    bottom: 16px;
+    right: 16px;
+  }
+</style>
+</body>
+</html>
