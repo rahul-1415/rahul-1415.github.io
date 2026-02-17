@@ -4,590 +4,1506 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rahul Babu</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='220 0 16 16%22'><text y='2214'22 font-size=`2216`22>😊</text></svg>">
 
-    
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: "Gochi Hand", cursive;
-            background-color: #121212;
-            color: #efe6dd;
-            font-size: 20px;
-            background-image: radial-gradient(#212121 2.5px, transparent 1px), radial-gradient(#121215 1px, transparent 1px);
-            background-size: 50px 50px;
+        :root {
+            --bg-0: #0b0f17;
+            --bg-1: #111726;
+            --panel: rgba(19, 25, 40, 0.86);
+            --panel-alt: rgba(23, 31, 49, 0.92);
+            --panel-border: rgba(255, 184, 107, 0.24);
+            --text: #eef1f9;
+            --muted: #a6afc3;
+            --accent: #ffb86b;
+            --accent-soft: rgba(255, 184, 107, 0.16);
+            --shadow: 0 16px 40px rgba(0, 0, 0, 0.38);
         }
 
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: "Space Grotesk", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% -8%, rgba(255, 184, 107, 0.18), transparent 32%),
+                radial-gradient(circle at 88% 0%, rgba(120, 158, 255, 0.16), transparent 38%),
+                linear-gradient(160deg, var(--bg-0), var(--bg-1));
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 0.7px, transparent 0.7px);
+            background-size: 3px 3px;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        a {
+            color: inherit;
+        }
 
         header {
-            background-color: #121212;
-            color: #efe6dd;
-            padding: 1rem 0;
-            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            backdrop-filter: blur(14px);
+            background: rgba(11, 15, 23, 0.78);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .header-inner {
+            width: min(1120px, 92vw);
+            margin: 0 auto;
+            padding: 1rem 0 0.85rem;
         }
 
         header h1 {
-            margin: 0;
-            font-family: 'Gochi Hand', cursive;
-            font-size: 80px;
+            margin: 0 0 0.6rem;
+            font-size: clamp(2rem, 4vw, 3.85rem);
+            letter-spacing: 0.02em;
         }
 
         nav ul {
             list-style: none;
+            margin: 0;
             padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
         }
 
         nav ul li a {
-            color: #efe6dd;
-            text-decoration: none;
-        }
-
-        .container {
-            padding: 2rem;
-            margin: 1rem auto;
-            max-width: 800px;
-            background: rgba(18, 18, 18, 0.8); /* Darker background with transparency */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
-        }
-
-        section h2 {
-            margin-top: 0;
-        }
-
-        .project-box, .experience-box {
-            border: 1px solid rgba(255, 255, 255, 0.1); /* Lighter border */
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            background: rgba(18, 18, 18, 0.8); /* Darker background with transparency */
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-        .experience-header, .role-header {
-            display: flex;
-            justify-content: space-between;
+            display: inline-flex;
             align-items: center;
+            justify-content: center;
+            padding: 0.42rem 0.72rem;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.02);
+            font-size: 0.85rem;
+            font-family: "JetBrains Mono", monospace;
+            color: var(--text);
+            text-decoration: none;
+            transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
         }
 
-        .experience-header h3, .role-header h3 {
+        nav ul li a:hover,
+        nav ul li a:focus-visible {
+            color: #1d1306;
+            border-color: rgba(255, 184, 107, 0.85);
+            background: rgba(255, 184, 107, 0.92);
+            outline: none;
+        }
+
+        .console-shell {
+            width: min(1120px, 92vw);
+            margin: 1rem auto 3.4rem;
+            display: grid;
+            gap: 1rem;
+        }
+
+        section {
+            scroll-margin-top: 120px;
+        }
+
+        .panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid var(--panel-border);
+            background: var(--panel);
+            box-shadow: var(--shadow);
+            padding: clamp(1rem, 2vw, 1.4rem);
+        }
+
+        .panel::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 184, 107, 0.7), transparent);
+            pointer-events: none;
+        }
+
+        .panel-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.4rem 0.75rem;
+            margin-bottom: 0.95rem;
+        }
+
+        .panel h2 {
             margin: 0;
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+            letter-spacing: 0.01em;
         }
 
-        .skills {
+        .panel-kicker {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.76rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .panel-content {
+            display: grid;
+            gap: 0.95rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 1rem;
+            align-items: start;
+        }
+
+        .hero-side {
+            display: grid;
+            gap: 0.7rem;
+            align-content: start;
+        }
+
+        .hero-text p {
+            margin: 0.55rem 0;
+            color: #d8deea;
+            line-height: 1.6;
+            font-size: clamp(0.95rem, 1.2vw, 1.04rem);
+        }
+
+        .link-row {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            font-family: "Gochi Hand", cursive;
-            font-size : 15px;
+            margin-top: 0.6rem;
         }
 
-        .skill-button, .link-button {
-            background-color: #fff;
-            color: #121212;
-            border: none;
-            padding: 0.25rem 1rem;
-            border-radius: 15px;
-            cursor: pointer;
+        .link-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.45rem 0.85rem;
+            border-radius: 999px;
             text-decoration: none;
-            display: inline-block;
-            margin-top: 0.5rem;
-            font-family: "Gochi Hand", cursive;
-            font-size: 20px;
+            font-size: 0.8rem;
+            font-family: "JetBrains Mono", monospace;
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+            transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+        }
+
+        .link-button:hover,
+        .link-button:focus-visible {
+            border-color: rgba(255, 184, 107, 0.9);
+            background: var(--accent-soft);
+            transform: translateY(-1px);
+            outline: none;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.6rem;
+        }
+
+        .stat {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            background: var(--panel-alt);
+            padding: 0.72rem;
+        }
+
+        .stat-label {
+            margin: 0;
+            font-size: 0.72rem;
+            color: var(--muted);
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .stat-value {
+            margin: 0.38rem 0 0;
+            font-size: clamp(1.2rem, 2vw, 1.6rem);
+            color: var(--accent);
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 600;
+        }
+
+        .profile-card {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 14px;
+            background: var(--panel-alt);
+            padding: 0.48rem;
+        }
+
+        .profile-shell {
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 2 / 2;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            box-shadow: inset 0 0 0 1px rgba(255, 184, 107, 0.12);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center 80%;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 0.55rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-chip {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 0.48rem 0.8rem;
+            font-size: 0.78rem;
+            font-family: "JetBrains Mono", monospace;
+            cursor: pointer;
+            transition: border-color 0.22s ease, background 0.22s ease, color 0.22s ease;
+        }
+
+        .filter-chip[aria-pressed="true"] {
+            border-color: rgba(255, 184, 107, 0.9);
+            background: var(--accent-soft);
+            color: #ffd3a3;
+        }
+
+        .filter-chip:focus-visible {
+            outline: 2px solid rgba(255, 184, 107, 0.7);
+            outline-offset: 2px;
+        }
+
+        .project-status,
+        .empty-state {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .project-list {
+            display: grid;
+            gap: 0.82rem;
+            grid-template-columns: 1fr;
+        }
+
+        .project-box,
+        .experience-box {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            background: var(--panel-alt);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+            padding: 0.95rem;
+        }
+
+        .project-box {
+            position: relative;
+            --rx: 0deg;
+            --ry: 0deg;
+            --lift: 0px;
+            transform: translateY(calc(var(--reveal-y, 0px) + var(--lift))) rotateX(var(--rx)) rotateY(var(--ry));
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.35s ease;
+            transform-style: preserve-3d;
+        }
+
+        .project-box:hover {
+            --lift: -3px;
+            border-color: rgba(255, 184, 107, 0.45);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(255, 184, 107, 0.14);
+        }
+
+        .project-box[hidden] {
+            display: none !important;
+        }
+
+        .project-meta {
+            margin: 0.25rem 0 0.7rem;
+            color: var(--muted);
+            font-size: 0.76rem;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .experience-header,
+        .role-header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 0.35rem 0.8rem;
+        }
+
+        .experience-header h3,
+        .role-header h3 {
+            margin: 0;
+        }
+
+        .experience-header p,
+        .role-header p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .project-box h3,
+        .experience-box h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .project-box p,
+        .experience-box p {
+            color: #d4dbeb;
+            line-height: 1.5;
+        }
+
+        .project-box ul,
+        .experience-box ul {
+            margin: 0.65rem 0 0;
+            padding-left: 1.1rem;
+        }
+
+        .project-box li,
+        .experience-box li {
+            margin: 0 0 0.45rem;
+            color: #d5dced;
+            line-height: 1.5;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .skill-button {
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            padding: 0.38rem 0.68rem;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.73rem;
+            line-height: 1.2;
+            cursor: default;
+        }
+
+        .project-box .skill-button {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            margin: 0 0.36rem 0.36rem 0;
+            padding: 0.24rem 0.5rem;
+            border-radius: 8px;
+            border: 1px dashed rgba(166, 175, 195, 0.5);
+            background: rgba(7, 11, 19, 0.72);
+            color: #b5bfd4;
+            font-size: 0.66rem;
+            letter-spacing: 0.01em;
+            line-height: 1.25;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .contact-list p {
+            margin: 0.45rem 0;
+            color: #d6deef;
+        }
+
+        .contact-list a {
+            color: #ffd8af;
+            text-decoration: none;
+        }
+
+        .contact-list a:hover,
+        .contact-list a:focus-visible {
+            text-decoration: underline;
+            outline: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            --reveal-y: 16px;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+
+        .panel.reveal {
+            transform: translateY(var(--reveal-y));
+        }
+
+        .reveal.is-visible {
+            opacity: 1;
+            --reveal-y: 0px;
+        }
+
+        #backToTopBtn {
+            display: none;
+            position: fixed;
+            right: 24px;
+            bottom: 26px;
+            z-index: 80;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 184, 107, 0.6);
+            border-radius: 50%;
+            background: rgba(23, 31, 49, 0.92);
+            color: var(--accent);
+            cursor: pointer;
+            place-items: center;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
+
+        #backToTopBtn:hover {
+            background: rgba(255, 184, 107, 0.15);
         }
 
         footer {
+            width: min(1120px, 92vw);
+            margin: 0 auto 1.2rem;
             text-align: center;
-            padding: 1rem 0;
-            background-color: #121212;
-            color: #efe6dd;
+            color: var(--muted);
+            font-size: 0.8rem;
+            font-family: "JetBrains Mono", monospace;
         }
-            #backToTopBtn {
-                display: none; /* Hidden by default */
-                position: fixed; /* Fixed position */
-                bottom: 20px; /* Place the button at the bottom */
-                right: 30px; /* Place the button 30px from the right */
-                z-index: 99; /* Make sure it does not overlap */
-                border: none; /* Remove borders */
-                outline: none; /* Remove outline */
-                background-color: #fff; /* Set a white background color */
-                color: #000; /* Set the arrow color to black */
-                cursor: pointer; /* Add a mouse pointer on hover */
-                padding: 15px; /* Some padding */
-                border-radius: 50%; /* Rounded corners to make it a circle */
-                font-size: 18px; /* Increase font size */
-            }
-        
-            #backToTopBtn:hover {
-                background-color: #f1f1f1; /* Add a light-grey background on hover */
-            }
 
-        /* Custom Scrollbar Styles */
         ::-webkit-scrollbar {
-            width: 12px; /* Width of the scrollbar */
+            width: 10px;
+            height: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #121212; /* Background color of the scrollbar track */
-            border-radius: 10px; /* Rounded corners for the track */
+            background: #0f1421;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #efe6dd; /* Color of the scrollbar thumb */
-            border-radius: 10px; /* Rounded corners for the thumb */
-            border: 3px solid #121212; /* Adds space around the thumb */
+            background: rgba(255, 184, 107, 0.48);
+            border-radius: 999px;
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #d4c4b8; /* Color of the scrollbar thumb on hover */
+        @media (min-width: 1024px) {
+            .project-list {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 1023px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .header-inner,
+            .console-shell,
+            footer {
+                width: min(1120px, 94vw);
+            }
+
+            nav ul li a {
+                font-size: 0.72rem;
+                padding: 0.36rem 0.62rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .filter-bar {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding-bottom: 0.2rem;
+            }
+
+            .filter-bar::-webkit-scrollbar {
+                display: none;
+            }
+
+            .filter-chip {
+                flex: 0 0 auto;
+            }
+
+            #backToTopBtn {
+                right: 14px;
+                bottom: 82px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .reveal {
+                opacity: 1 !important;
+                transform: none !important;
+                --reveal-y: 0px !important;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Rahul Babu</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Work Experience</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#publication">Publication</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#certification">Certification</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="header-inner">
+            <h1>Rahul Babu</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#publication">Publication</a></li>
+                    <li><a href="#certification">Certification</a></li>
+                    <li><a href="#education">Education</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>
-                Hello! </p><p>I am Rahul Babu, Software Engineer with experience in building AI agents, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.
-            </p>
-            <p>
-                At Hovian Inc., Integrated AI and UX enhancements into an Electron + React desktop app by building reusable UI components, REST API integrations, and a Python-based LLM text-to-animated GIF generation pipeline, plus dark mode and native notifications.
-            </p>
-            <p>
-                Previously at ASU's Decision Theater, Built and deployed LLM + ML systems (RAG, automated eval tooling, and an opioid-risk forecasting dashboard) by automating data pipelines, integrating public datasets, and shipping interactive apps on Jetstream2 and Google Cloud Run.
-            </p>
-            <p>
-                Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
-            </p>
-            <p>
-                I have 3 years of experience building AI-driven full-stack applications and analytics solutions using React, JavaScript, Python, and Java. I have also deployed containerized microservices on AWS (EC2, RDS, S3, DocumentDB) with CI/CD and monitoring through CloudWatch.
-            </p>
-            <a href="https://github.com/rahul-1415" class="link-button">GitHub</a>
-            <a href="https://www.linkedin.com/in/rahulb1407/" class="link-button">LinkedIn</a>
-            <a href="https://rahul-1415.github.io/" class="link-button">Portfolio</a>
-            <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">AWS Certification</a>
-        </div>
-    </section>
-
-    <section id="experience">
-        <div class="container">
-            <h2>Work Experience</h2>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>Hovian Inc.</h3>
-                    <p>Cucamanga, California, USA</p>
+    <main class="console-shell">
+        <section id="about" class="panel reveal">
+            <div class="panel-header">
+                <div class="link-row">
+                    <a href="https://github.com/rahul-1415" class="link-button">GitHub</a>
+                    <a href="https://www.linkedin.com/in/rahulb1407/" class="link-button">LinkedIn</a>
+                    <a href="https://rahul-1415.github.io/" class="link-button">Portfolio</a>
+                    <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">AWS Certification</a>
                 </div>
-                <div class="role-header">
-                    <p><strong>Software Engineer</strong></p>
-                    <p>July 2025 - Dec 2025</p>
-                </div>
-                <ul>
-                    <li>Built and maintained an Electron + React single-page desktop application using React, JavaScript/TypeScript, HTML5, and CSS3, supporting multiple interactive UI views for notification and workflow management.</li>
-                    <li>Designed and shipped 20+ modular, reusable React components (chat UI, prompt inputs, settings panels, toggles) to support dynamic features such as AI chat, theme switching, and workflow navigation.</li>
-                    <li>Managed client-side state and UI transitions (component-level state + shared app state), reducing UI-related bugs and improving interaction responsiveness and UX consistency.</li>
-                    <li>Integrated frontend modules with backend services via RESTful APIs, implementing reliable data fetching, loading states, and error handling for daily user workflows.</li>
-                    <li>Developed Python-based image processing utilities to power an AI “Animated GIF” feature (sprite sheet slicing, pixelation with PIL, GIF assembly with imageio), delivering animated outputs from text prompts.</li>
-                    <li>Implemented dark mode with persisted user preferences and OS theme sync, and integrated native desktop notifications via Electron APIs to ensure alerts triggered reliably even when the app was minimized.</li>
-                    <li>Implemented a hybrid backend communication layer using Node.js with REST (HTTP) APIs and WebSockets to stream real-time Outlook notifications and support AI-generated responses.</li>
-                    <li>Built and maintained an Electron + Node.js desktop app with tabbed and multi-view navigation using JavaScript, HTML5, and CSS3 to support notification and workflow management.</li>
-                </ul>
             </div>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>ASU Decision Theater</h3>
-                    <p>Tempe, Arizona, USA</p>
+            <div class="panel-content hero-grid">
+                <div class="hero-text">
+                    <p>Hello! I am Rahul, Software Engineer with experience in building AI agents, backend development, and cloud-native solutions. Skilled in building LLM-powered research assistants, NLP pipelines, and scalable APIs that process millions of records daily.</p>
+                    <p>At Hovian Inc., Integrated AI and UX enhancements into an Electron + React desktop app by building reusable UI components, REST API integrations, and a Python-based LLM text-to-animated GIF generation pipeline, plus dark mode and native notifications.</p>
+                    <p>Previously at ASU's Decision Theater, Built and deployed LLM + ML systems (RAG, automated eval tooling, and an opioid-risk forecasting dashboard) by automating data pipelines, integrating public datasets, and shipping interactive apps on Jetstream2 and Google Cloud Run.</p>
+                    <p>Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect - Associate.</p>
+                    <p>I have 3 years of experience building AI-driven full-stack applications and analytics solutions using React, JavaScript, Python, and Java. I have also deployed containerized microservices on AWS (EC2, RDS, S3, DocumentDB) with CI/CD and monitoring through CloudWatch.</p>
                 </div>
-                <div class="role-header">
-                    <p><strong>Software Engineer</strong></p>
-                    <p>May 2024 - May 2025</p>
+                <div class="hero-side">
+                    <div class="stats-grid">
+                        <article class="stat">
+                            <p class="stat-label">Years Experience</p>
+                            <p class="stat-value" data-counter-target="3">3</p>
+                        </article>
+                        <article class="stat">
+                            <p class="stat-label">Projects</p>
+                            <p class="stat-value" data-counter-target="16">16</p>
+                        </article>
+                        <article class="stat">
+                            <p class="stat-label">Publications</p>
+                            <p class="stat-value" data-counter-target="2">2</p>
+                        </article>
+                        <article class="stat">
+                            <p class="stat-label">Certifications</p>
+                            <p class="stat-value" data-counter-target="10">10</p>
+                        </article>
+                    </div>
+                    <article class="profile-card">
+                        <div class="profile-shell">
+                            <img class="profile-image" src="assets/profile-photo.jpg" alt="Rahul Babu portrait photo">
+                        </div>
+                    </article>
                 </div>
-                <ul>
-                    <li>Designed and implemented a machine learning pipeline using Python and R to analyze 50K+ census and public healthdatasets for regional risk prediction.</li>
-                    <li>Trained and evaluated predictive models using XGBoost and ensemble techniques, focusing on accuracy and interpretability.</li>
-                    <li>Built a real-time interactive risk dashboard using React and TypeScript, supporting 10+ dynamic visual components and deployed with FastAPI and Docker on Google Cloud Run.</li>
-                    <li>Developed backend API services using FastAPI to serve dashboard data, enabling low-latency access for real-time filtering and visualization.</li>
-                    <li>Automated large-scale data collection using Python and Selenium, gathering 1,000+ healthcare survey responses and 795 climate policy documents, followed by structured analysis and evaluation to measure LLM resilience on heat and healthcare prompts.</li>
-                    <li>Deployed a RAG-based chatbot using Llama 3, LangChain, and Chroma on Jetstream2 HPC to summarize 100+ interview transcripts for the Maricopa Association of Governments and support ASU’s LLM resilience research with climate policy recommendations.</li></li>
-                    <li>Performed geospatial opioid risk analysis using PostGIS by writing spatial SQL queries (proximity and region joins, hotspot-style aggregations) to map overdose patterns and generate region-level insights for the dashboard.</li>
-                </ul>
             </div>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>InnoHat Systems</h3>
-                    <p>Chennai, TN, India</p>
-                </div>
-                <div class="role-header">
-                    <p><strong>Software Developer</strong></p>
-                    <p>Jan 2022 - July 2023</p>
-                </div>
-                <ul>
-                    <li>Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews, reducing schema-change overhead while keeping financial data ACID-compliant.</li>
-                    <li>Built Flask REST APIs for checkout, refunds, and shipment events, with 200+ test cases in pytest to reach 85% coverage and reduce regression bugs.</li>
-                    <li>Orchestrated ETL pipelines in Python (pandas, SQLAlchemy, and PyMongo) to merge order history with review sentiment data, optimizing runtime by 40% on 20M+ rows and 5M+ documents.</li>
-                    <li>Containerized services with Docker and deployed on AWS (EC2, RDS, S3, DocumentDB) with CloudWatch monitoring to maintain stability during seasonal traffic spikes.</li>
-                    <li>Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and reducing operations effort by 12 hours per week.</li>
-                    <li>Created a React.js customer portal for browsing catalogs and personalized deals, integrating cache and lazy loading to reduce page load time by 35%.</li>
-                    <li>Trained a scikit-learn recommendation engine using transactional PostgreSQL and behavioral MongoDB data, improving upsell conversion by 11% in pilot rollout.</li>
-                </ul>
+        </section>
+
+        <section id="projects" class="panel reveal">
+            <div class="panel-header">
+                <h2>Projects</h2>
             </div>
-        </div>
-    </section>
+            <div class="panel-content">
+                <div class="filter-bar" role="group" aria-label="Project filters">
+                    <button class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+                    <button class="filter-chip" data-filter="ai" aria-pressed="false">AI</button>
+                    <button class="filter-chip" data-filter="fullstack" aria-pressed="false">Full-Stack</button>
+                    <button class="filter-chip" data-filter="cloud" aria-pressed="false">Cloud</button>
+                </div>
+                <p class="project-status" id="projectStatus" aria-live="polite">16 projects shown</p>
+                <p class="empty-state" id="projectEmpty" hidden>No projects match this filter.</p>
 
-    <section id="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <div class="skills">
-                <button class="skill-button">Python (Pandas, NumPy, Async Programming)</button>
-                <button class="skill-button">Django</button>
-                <button class="skill-button">Flask</button>
-                <button class="skill-button">FastAPI</button>
-                <button class="skill-button">Java</button>
-                <button class="skill-button">RESTful API Development</button>
-                <button class="skill-button">Microservices</button>
-                <button class="skill-button">Scalability</button>
-                <button class="skill-button">Database Management (SQL, PostgreSQL, MySQL)</button>
-                <button class="skill-button">Angular</button>
-                <button class="skill-button">React</button>
-                <button class="skill-button">TypeScript</button>
-                <button class="skill-button">HTML5</button>
-                <button class="skill-button">CSS3</button>
-                <button class="skill-button">JavaScript (ES6+)</button>
-                <button class="skill-button">State Management</button>
-                <button class="skill-button">Component Architecture</button>
-                <button class="skill-button">Lazy Loading</button>
-                <button class="skill-button">Node.js & Express</button>
-                <button class="skill-button">GraphQL</button>
-                <button class="skill-button">API Integration</button>
-                <button class="skill-button">Responsive UI Design</button>
-                <button class="skill-button">Webpack</button>
-                <button class="skill-button">LLM Development (GPT-4, LLaMA)</button>
-                <button class="skill-button">LangChain</button>
-                <button class="skill-button">RAG Frameworks</button>
-                <button class="skill-button">Prompt Engineering & Optimization</button>
-                <button class="skill-button">TensorFlow</button>
-                <button class="skill-button">PyTorch</button>
-                <button class="skill-button">Scikit-learn</button>
-                <button class="skill-button">XGBoost</button>
-                <button class="skill-button">Hugging Face Transformers</button>
-                <button class="skill-button">spaCy (NLP)</button>
-                <button class="skill-button">AWS</button>
-                <button class="skill-button">Data Pipelines (ETL, Ingestion, Validation, Warehousing, Transformation)</button>
-                <button class="skill-button">Data Lake</button>
-                <button class="skill-button">Data Governance & Quality</button>
-                <button class="skill-button">Git/GitHub/GitLab</button>
+                <div class="project-list" id="projectList">
+                    <div class="project-box reveal" data-tags="fullstack">
+                        <div class="experience-header">
+                            <h3>Interactive Portfolio</h3>
+                            <p class="project-meta">Next.js, TypeScript, Three.js, R3F, GraphQL, Hygraph | Dec 2025 - Current</p>
+                        </div>
+                        <p>
+                            <a href="https://rahulbabu.netlify.app/" class="link-button">Live Demo</a>
+                            <a href="https://github.com/rahul-1415/Interactive-Portfolio" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Built and deployed an interactive 3D portfolio experience using Next.js and TypeScript with Three.js and React Three Fiber (Drei, Rapier) for immersive UI and animations.</li>
+                            <li>Integrated Hygraph (GraphCMS) using GraphQL and Apollo Client to manage portfolio content through a CMS-driven workflow.</li>
+                        </ul>
+                    </div>
 
+                    <div class="project-box reveal" data-tags="ai fullstack cloud">
+                        <div class="experience-header">
+                            <h3>ClimateActionPolicy RAG Application</h3>
+                            <p class="project-meta">Streamlit, LangChain, ChromaDB, LLaMA 3, Transformers | July 2024 - Sept 2024</p>
+                        </div>
+                        <p>
+                            <a href="https://cap-rag.streamlit.app/" class="link-button">Live Demo</a>
+                            <a href="https://github.com/rahul-1415/CAP-RAG" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Deployed a Retrieval-Augmented Generation application that retrieves relevant policy documents and generates context-enriched responses for climate action recommendations.</li>
+                            <li>Built an interactive Streamlit chat interface with multi-session history so users can manage and review conversations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack cloud">
+                        <div class="experience-header">
+                            <h3>Opioid Overdose Forecasting Data Visualizer</h3>
+                            <p class="project-meta">React, TypeScript, FastAPI, Docker | April 2025 - May 2025</p>
+                        </div>
+                        <p>
+                            <a href="https://opioid-overdose-forecasting.netlify.app/" class="link-button">Live Demo</a>
+                            <a href="https://github.com/rahul-1415/Opioid-Overdose-Forecasting" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Developed an interactive web application to visualize Arizona opioid-risk data at the Census Block Group level using a FastAPI backend and React + TypeScript frontend.</li>
+                            <li>Designed backend filtering and API serving and packaged the system with a unified Dockerfile for streamlined deployment.</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai">
+                        <div class="experience-header">
+                            <h3>Fake-Job-Detection</h3>
+                            <p class="project-meta">Python, Machine Learning, NLP, Fraud Detection | Feb 2025 - May 2025</p>
+                        </div>
+                        <p>Developed a fake job posting predictor to identify fraudulent listings that mimic legitimate roles and help improve trust and safety for job seekers and hiring platforms.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Fake-Job-Detection" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Built a machine learning workflow to classify job posts as real or fraudulent using textual and structured listing signals.</li>
+                            <li>Framed the system for real-world safety use cases, such as flagging suspicious listings before applicants share personal information or make payments.</li>
+                        </ul>
+                        <p class="skill-button">Python</p>
+                        <p class="skill-button">Machine Learning</p>
+                        <p class="skill-button">NLP</p>
+                        <p class="skill-button">Fraud Detection</p>
+                        <p class="skill-button">Classification</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack cloud">
+                        <div class="experience-header">
+                            <h3>Distributed NoSQL Database System for an E-Commerce Platform</h3>
+                            <p class="project-meta">Kafka, Redis, MongoDB, FastAPI | Sep 2024 - Dec 2024</p>
+                        </div>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Distributed-NoSQL-Database-System-for-an-E-Commerce-Platform" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Designed a distributed NoSQL database system using Kafka, Redis, and MongoDB, achieving 100% consistency post-recovery and under 500 ms average response time for e-commerce data operations in fault-tolerant scenarios.</li>
+                            <li>Optimized cross-region replication with FastAPI middleware, ensuring zero data loss during node failures and 248 ms response times during outages through Kafka-backed asynchronous recovery.</li>
+                        </ul>
+                        <p class="skill-button">Kafka</p>
+                        <p class="skill-button">Redis</p>
+                        <p class="skill-button">MongoDB</p>
+                        <p class="skill-button">FastAPI</p>
+                        <p class="skill-button">Distributed Systems</p>
+                        <p class="skill-button">NoSQL</p>
+                        <p class="skill-button">Fault Tolerance</p>
+                        <p class="skill-button">Cross-Region Replication</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai">
+                        <div class="experience-header">
+                            <h3>User Identification, Authentication, and Interactions for Social Media Data Analytics using AI</h3>
+                            <p class="project-meta">AI Research, Social Media Analytics, Team Leadership | Sep 2024 - Dec 2024</p>
+                        </div>
+                        <p>Led a research project as the team lead for an 8-member group and documented a 60-page research paper on user identification, authentication, and interaction analysis for social media data analytics using AI.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/User-Identification-Authentication-and-Interactions-for-Social-Media-Data-Analytics-using-AI" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Directed project planning, research coordination, and technical execution across an 8-member team.</li>
+                            <li>Compiled and authored a comprehensive 60-page technical research report covering system design, experimentation, and findings.</li>
+                        </ul>
+                        <p class="skill-button">Artificial Intelligence</p>
+                        <p class="skill-button">Social Media Analytics</p>
+                        <p class="skill-button">User Authentication</p>
+                        <p class="skill-button">Research Leadership</p>
+                        <p class="skill-button">Technical Documentation</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack cloud">
+                        <div class="experience-header">
+                            <h3>Movie Review WebApp</h3>
+                            <p class="project-meta">React Search UI, Elastic App Search, Node.js, npm | Aug 2024 - Sep 2024</p>
+                        </div>
+                        <p>Built a configurable movie-review search experience using Elastic Search UI with App Search engine integration, designed for quick setup, customization, and static deployment.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Movie-Review-WebApp" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Implemented engine-driven search configuration via JSON (`engine.json`) for fields, facets, sorting, and query suggestions without regenerating the app.</li>
+                            <li>Set up reproducible local development with Node 16.13.0 and npm, and enabled static asset build-and-embed workflow for production hosting.</li>
+                        </ul>
+                        <p class="skill-button">React</p>
+                        <p class="skill-button">Elastic Search UI</p>
+                        <p class="skill-button">Elastic App Search</p>
+                        <p class="skill-button">Node.js</p>
+                        <p class="skill-button">npm</p>
+                        <p class="skill-button">JSON Configuration</p>
+                        <p class="skill-button">Static Build</p>
+                        <p class="skill-button">Netlify Deployment</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai fullstack cloud">
+                        <div class="experience-header">
+                            <h3>LLM Response Aggregation Tool</h3>
+                            <p class="project-meta">Selenium IDE, Python, LLM Evaluation, Data Automation | May 2024 - Jul 2024</p>
+                        </div>
+                        <p>Built a web automation and evaluation pipeline to run prompts through multiple LLMs, aggregate responses in structured sheets, and benchmark output quality with NLP metrics.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/LLM-AggregationTool" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Automated prompt execution with Selenium IDE across ChatGPT, Gemini, Claude, Perplexity, Meta AI, and HuggingChat using a localhost prompt-reader workflow.</li>
+                            <li>Captured model responses in Google Forms and exported to Excel/CSV for downstream analysis and reporting.</li>
+                            <li>Implemented Python-based evaluation workflows (Response_Evaluation.ipynb) using BLEU, ROUGE, cosine similarity, Distinct-1/2, sentiment, response-length analysis, and word clouds.</li>
+                            <li>Included data-scraping support for 790 climate policy articles from c40knowledgehub.org to build evaluation and comparison datasets.</li>
+                        </ul>
+                        <p class="skill-button">Selenium IDE</p>
+                        <p class="skill-button">Python</p>
+                        <p class="skill-button">LLM Benchmarking</p>
+                        <p class="skill-button">BLEU</p>
+                        <p class="skill-button">ROUGE</p>
+                        <p class="skill-button">Cosine Similarity</p>
+                        <p class="skill-button">Distinct-1/2</p>
+                        <p class="skill-button">Data Automation</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai cloud">
+                        <div class="experience-header">
+                            <h3>Sentiment Analysis on Twitter Datasets (NLP)</h3>
+                            <p class="project-meta">Python, Amazon SageMaker | Jan 2024 - May 2024</p>
+                        </div>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Sentiment-Analysis-on-Twitter-Datasets" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Implemented SVM, Logistic Regression, Naive Bayes, XGBoost, BiLSTM, and CNN models on 416K tweets, achieving 97% accuracy with CNN using TF-IDF/word-embedding preprocessing and stratified sampling.</li>
+                            <li>Identified SVM as the most robust model (94.15% accuracy) through comparative ROC and confusion matrix analysis.</li>
+                        </ul>
+                        <p class="skill-button">Python</p>
+                        <p class="skill-button">Amazon SageMaker</p>
+                        <p class="skill-button">NLP</p>
+                        <p class="skill-button">SVM</p>
+                        <p class="skill-button">Logistic Regression</p>
+                        <p class="skill-button">Naive Bayes</p>
+                        <p class="skill-button">XGBoost</p>
+                        <p class="skill-button">BiLSTM</p>
+                        <p class="skill-button">CNN</p>
+                        <p class="skill-button">TF-IDF</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack">
+                        <div class="experience-header">
+                            <h3>IoT Device Manager using Blockchain</h3>
+                            <p class="project-meta">Jan 2023 - May 2023</p>
+                        </div>
+                        <p>This project focuses on establishing a robust and secure framework for the management of IoT devices, underpinned by the principles of data immutability and transparency, all facilitated by the innovative use of blockchain technology.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/IOTDM" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Implemented a blockchain-based solution for IoT device management.</li>
+                            <li>Recorded critical transactions including device registration, management, and ownership transfers.</li>
+                            <li>Developed a user-friendly web application using ReactJS.</li>
+                        </ul>
+                        <p class="skill-button">MetaMask</p>
+                        <p class="skill-button">Truffle Framework</p>
+                        <p class="skill-button">Ganache</p>
+                        <p class="skill-button">Solidity</p>
+                        <p class="skill-button">React.js</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai">
+                        <div class="experience-header">
+                            <h3>Forest Monitoring using Hyperspectral Imaging</h3>
+                            <p class="project-meta">Nov 2022 - May 2023</p>
+                        </div>
+                        <p>This project focuses on utilizing hyperspectral imaging for forest terrain monitoring, aiming to provide detailed insights into forest contents and potential risks. It utilizes the Indian Pines dataset, which captures hyperspectral data from a forested area, and employs a hybrid classification method, including Support Vector Machines (SVM), 2D Convolutional Neural Networks (CNN), 3D CNN, M3D-CNN, SSRN, and a Hybrid model for precise forest analysis.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Forest-Monitoring" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Utilized Indian Pines dataset for hyperspectral imaging.</li>
+                            <li>Employed hybrid classification methods combining SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.</li>
+                            <li>Provided comprehensive insights including vegetation cover percentage, building presence, and hazard detection.</li>
+                        </ul>
+                        <p class="skill-button">Scikit-Learn</p>
+                        <p class="skill-button">Machine Learning</p>
+                        <p class="skill-button">TensorFlow</p>
+                        <p class="skill-button">Exploratory Data Analysis</p>
+                        <p class="skill-button">NumPy</p>
+                        <p class="skill-button">Data Science</p>
+                        <p class="skill-button">Data Analysis</p>
+                        <p class="skill-button">Python</p>
+                        <p class="skill-button">Pandas</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai cloud">
+                        <div class="experience-header">
+                            <h3>Web Phishing Detection</h3>
+                            <p class="project-meta">Aug 2022 - Nov 2022</p>
+                        </div>
+                        <p>The Web Phishing Detection project is a Python-based solution deployed on the IBM Cloud platform, focused on the detection of phishing websites. It incorporates machine learning techniques to enhance accuracy.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/IBM-Project-4998-1658745015" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Trained 10 machine learning models for phishing detection.</li>
+                            <li>Deployed the highest accuracy model on IBM Cloud.</li>
+                            <li>Developed a website interface for user interaction with the phishing detection system.</li>
+                        </ul>
+                        <p class="skill-button">Machine Learning</p>
+                        <p class="skill-button">Exploratory Data Analysis</p>
+                        <p class="skill-button">Data Science</p>
+                        <p class="skill-button">Data Analysis</p>
+                        <p class="skill-button">Python</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai">
+                        <div class="experience-header">
+                            <h3>Path Navigation using Deep Q Learning</h3>
+                            <p class="project-meta">Jan 2022 - Sep 2022</p>
+                        </div>
+                        <p>An application developed using Kivy and PyTorch Framework. The application simulates an autonomous vehicle navigating a map I designed, complete with manually placed obstacles.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/PathNavigation/tree/main/PathNavigation" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Used Deep Q Networks (DQNs) with relu activation functions for navigation.</li>
+                            <li>Designed a reward system to improve obstacle avoidance capabilities.</li>
+                            <li>Received approval for publication in ADCOM Volume 133.</li>
+                        </ul>
+                        <p class="skill-button">Machine Learning</p>
+                        <p class="skill-button">NumPy</p>
+                        <p class="skill-button">Python</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack">
+                        <div class="experience-header">
+                            <h3>Tournament Manager</h3>
+                            <p class="project-meta">Jul 2021 - Nov 2021</p>
+                        </div>
+                        <p>The Tournament Manager is a Java-based application designed to facilitate the efficient organization of sports tournaments.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Tournament-Manager/tree/main/Tournament_Manager" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Designed and configured tournaments for different divisions and sports.</li>
+                            <li>Streamlined team enrollment and player information updates.</li>
+                            <li>Developed using Java and MySQL.</li>
+                        </ul>
+                        <p class="skill-button">Java</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="ai">
+                        <div class="experience-header">
+                            <h3>Harmful Comments Classifier</h3>
+                            <p class="project-meta">Jan 2021 - Apr 2021</p>
+                        </div>
+                        <p>The "Harmful Comments Classifier" is a Python-based Natural Language Processing (NLP) project, executed within the Google Colab environment.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/Harmful-Comments-Classifier" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Developed a deep learning model for classifying comments based on toxicity.</li>
+                            <li>Utilized embedding techniques, bi-directional LSTM, and dense models.</li>
+                            <li>Executed within the Google Colab environment.</li>
+                        </ul>
+                        <p class="skill-button">Machine Learning</p>
+                        <p class="skill-button">Exploratory Data Analysis</p>
+                        <p class="skill-button">Data Science</p>
+                        <p class="skill-button">Data Analysis</p>
+                        <p class="skill-button">Python</p>
+                    </div>
+
+                    <div class="project-box reveal" data-tags="fullstack">
+                        <div class="experience-header">
+                            <h3>EATERIO</h3>
+                            <p class="project-meta">Jan 2020 - May 2020</p>
+                        </div>
+                        <p>"EATERIO" is a web application built using HTML, CSS, JavaScript, and MongoDB, designed to facilitate food ordering and management within organizations.</p>
+                        <p>
+                            <a href="https://github.com/rahul-1415/EATERIO" class="link-button">Code</a>
+                        </p>
+                        <ul>
+                            <li>Streamlined the food ordering process within organizations.</li>
+                            <li>Developed using HTML, CSS, JavaScript, and MongoDB.</li>
+                            <li>Provided a user-friendly interface for placing and managing food orders.</li>
+                        </ul>
+                        <p class="skill-button">HTML</p>
+                        <p class="skill-button">CSS</p>
+                        <p class="skill-button">JavaScript</p>
+                        <p class="skill-button">MongoDB</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Forest Monitoring using Hyperspectral Imaging</h3>
-                    <p><strong>Nov 2022 - May 2023</strong></p>
-                </div>
-                <p>This project focuses on utilizing hyperspectral imaging for forest terrain monitoring, aiming to provide detailed insights into forest contents and potential risks. It utilizes the Indian Pines dataset, which captures hyperspectral data from a forested area, and employs a hybrid classification method, including Support Vector Machines (SVM), 2D Convolutional Neural Networks (CNN), 3D CNN, M3D-CNN, SSRN, and a Hybrid model for precise forest analysis.</p>
-                <ul>
-                    <li>Utilized Indian Pines dataset for hyperspectral imaging.</li>
-                    <li>Employed hybrid classification methods combining SVM, 2D CNN, 3D CNN, M3D-CNN, SSRN, and a Hybrid model.</li>
-                    <li>Provided comprehensive insights including vegetation cover percentage, building presence, and hazard detection.</li>
-                </ul>
-                <p class="skill-button">Scikit-Learn</p>
-                <p class="skill-button">Machine Learning</p>
-                <p class="skill-button">TensorFlow</p>
-                <p class="skill-button">Exploratory Data Analysis</p>
-                <p class="skill-button">NumPy</p>
-                <p class="skill-button">Data Science</p>
-                <p class="skill-button">Data Analysis</p>
-                <p class="skill-button">Python</p>
-                <p class="skill-button">Pandas</p>
-
+        <section id="experience" class="panel reveal">
+            <div class="panel-header">
+                <h2>Work Experience</h2>
             </div>
-
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>IoT Device Manager using Blockchain</h3>
-                    <p><strong>Jan 2023 - May 2023</strong></p>
+            <div class="panel-content">
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Hovian Inc.</h3>
+                        <p>Cucamanga, California, USA</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>Software Engineer</strong></p>
+                        <p>July 2025 - Dec 2025</p>
+                    </div>
+                    <ul>
+                        <li>Built and maintained an Electron + React single-page desktop application using React, JavaScript/TypeScript, HTML5, and CSS3, supporting multiple interactive UI views for notification and workflow management.</li>
+                        <li>Designed and shipped 20+ modular, reusable React components (chat UI, prompt inputs, settings panels, toggles) to support dynamic features such as AI chat, theme switching, and workflow navigation.</li>
+                        <li>Managed client-side state and UI transitions (component-level state + shared app state), reducing UI-related bugs and improving interaction responsiveness and UX consistency.</li>
+                        <li>Integrated frontend modules with backend services via RESTful APIs, implementing reliable data fetching, loading states, and error handling for daily user workflows.</li>
+                        <li>Developed Python-based image processing utilities to power an AI "Animated GIF" feature (sprite sheet slicing, pixelation with PIL, GIF assembly with imageio), delivering animated outputs from text prompts.</li>
+                        <li>Implemented dark mode with persisted user preferences and OS theme sync, and integrated native desktop notifications via Electron APIs to ensure alerts triggered reliably even when the app was minimized.</li>
+                        <li>Implemented a hybrid backend communication layer using Node.js with REST (HTTP) APIs and WebSockets to stream real-time Outlook notifications and support AI-generated responses.</li>
+                        <li>Built and maintained an Electron + Node.js desktop app with tabbed and multi-view navigation using JavaScript, HTML5, and CSS3 to support notification and workflow management.</li>
+                    </ul>
                 </div>
-                <p>This project focuses on establishing a robust and secure framework for the management of IoT devices, underpinned by the principles of data immutability and transparency, all facilitated by the innovative use of blockchain technology.</p>
-                <ul>
-                    <li>Implemented a blockchain-based solution for IoT device management.</li>
-                    <li>Recorded critical transactions including device registration, management, and ownership transfers.</li>
-                    <li>Developed a user-friendly web application using ReactJS.</li>
-                </ul>
-                <p class="skill-button">MetaMask</p>
-                <p class="skill-button">Truffle Framework</p>
-                <p class="skill-button">Ganache</p>
-                <p class="skill-button">Solidity</p>
-                <p class="skill-button">React.js</p>
 
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>ASU Decision Theater</h3>
+                        <p>Tempe, Arizona, USA</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>Software Engineer</strong></p>
+                        <p>May 2024 - May 2025</p>
+                    </div>
+                    <ul>
+                        <li>Designed and implemented a machine learning pipeline using Python and R to analyze 50K+ census and public healthdatasets for regional risk prediction.</li>
+                        <li>Trained and evaluated predictive models using XGBoost and ensemble techniques, focusing on accuracy and interpretability.</li>
+                        <li>Built a real-time interactive risk dashboard using React and TypeScript, supporting 10+ dynamic visual components and deployed with FastAPI and Docker on Google Cloud Run.</li>
+                        <li>Developed backend API services using FastAPI to serve dashboard data, enabling low-latency access for real-time filtering and visualization.</li>
+                        <li>Automated large-scale data collection using Python and Selenium, gathering 1,000+ healthcare survey responses and 795 climate policy documents, followed by structured analysis and evaluation to measure LLM resilience on heat and healthcare prompts.</li>
+                        <li>Deployed a RAG-based chatbot using Llama 3, LangChain, and Chroma on Jetstream2 HPC to summarize 100+ interview transcripts for the Maricopa Association of Governments and support ASU's LLM resilience research with climate policy recommendations.</li>
+                        <li>Performed geospatial opioid risk analysis using PostGIS by writing spatial SQL queries (proximity and region joins, hotspot-style aggregations) to map overdose patterns and generate region-level insights for the dashboard.</li>
+                    </ul>
+                </div>
+
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>InnoHat Systems</h3>
+                        <p>Chennai, TN, India</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>Software Developer</strong></p>
+                        <p>Jan 2022 - July 2023</p>
+                    </div>
+                    <ul>
+                        <li>Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews, reducing schema-change overhead while keeping financial data ACID-compliant.</li>
+                        <li>Built Flask REST APIs for checkout, refunds, and shipment events, with 200+ test cases in pytest to reach 85% coverage and reduce regression bugs.</li>
+                        <li>Orchestrated ETL pipelines in Python (pandas, SQLAlchemy, and PyMongo) to merge order history with review sentiment data, optimizing runtime by 40% on 20M+ rows and 5M+ documents.</li>
+                        <li>Containerized services with Docker and deployed on AWS (EC2, RDS, S3, DocumentDB) with CloudWatch monitoring to maintain stability during seasonal traffic spikes.</li>
+                        <li>Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and reducing operations effort by 12 hours per week.</li>
+                        <li>Created a React.js customer portal for browsing catalogs and personalized deals, integrating cache and lazy loading to reduce page load time by 35%.</li>
+                        <li>Trained a scikit-learn recommendation engine using transactional PostgreSQL and behavioral MongoDB data, improving upsell conversion by 11% in pilot rollout.</li>
+                    </ul>
+                </div>
             </div>
+        </section>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Web Phishing Detection</h3>
-                    <p><strong>Aug 2022 - Nov 2022</strong></p>
-                </div>
-                <p>The Web Phishing Detection project is a Python-based solution deployed on the IBM Cloud platform, focused on the detection of phishing websites. It incorporates machine learning techniques to enhance accuracy.</p>
-                <ul>
-                    <li>Trained 10 machine learning models for phishing detection.</li>
-                    <li>Deployed the highest accuracy model on IBM Cloud.</li>
-                    <li>Developed a website interface for user interaction with the phishing detection system.</li>
-                </ul>
-                <p class="skill-button"> Machine Learning</p>
-                <p class="skill-button"> Exploratory Data Analysis</p>
-                <p class="skill-button"> Data Science</p>
-                <p class="skill-button"> Data Analysis</p>
-                <p class="skill-button"> Python</p>
+        <section id="skills" class="panel reveal">
+            <div class="panel-header">
+                <h2>Skills</h2>
             </div>
+            <div class="panel-content">
+                <div class="skills-grid">
+                    <button class="skill-button">Python (Pandas, NumPy, Async Programming)</button>
+                    <button class="skill-button">Django</button>
+                    <button class="skill-button">Flask</button>
+                    <button class="skill-button">FastAPI</button>
+                    <button class="skill-button">Java</button>
+                    <button class="skill-button">RESTful API Development</button>
+                    <button class="skill-button">Microservices</button>
+                    <button class="skill-button">Scalability</button>
+                    <button class="skill-button">Database Management (SQL, PostgreSQL, MySQL)</button>
+                    <button class="skill-button">Angular</button>
+                    <button class="skill-button">React</button>
+                    <button class="skill-button">TypeScript</button>
+                    <button class="skill-button">HTML5</button>
+                    <button class="skill-button">CSS3</button>
+                    <button class="skill-button">JavaScript (ES6+)</button>
+                    <button class="skill-button">State Management</button>
+                    <button class="skill-button">Component Architecture</button>
+                    <button class="skill-button">Lazy Loading</button>
+                    <button class="skill-button">Node.js &amp; Express</button>
+                    <button class="skill-button">GraphQL</button>
+                    <button class="skill-button">API Integration</button>
+                    <button class="skill-button">Responsive UI Design</button>
+                    <button class="skill-button">Webpack</button>
+                    <button class="skill-button">LLM Development (GPT-4, LLaMA)</button>
+                    <button class="skill-button">LangChain</button>
+                    <button class="skill-button">RAG Frameworks</button>
+                    <button class="skill-button">Prompt Engineering &amp; Optimization</button>
+                    <button class="skill-button">TensorFlow</button>
+                    <button class="skill-button">PyTorch</button>
+                    <button class="skill-button">Scikit-learn</button>
+                    <button class="skill-button">XGBoost</button>
+                    <button class="skill-button">Hugging Face Transformers</button>
+                    <button class="skill-button">spaCy (NLP)</button>
+                    <button class="skill-button">AWS</button>
+                    <button class="skill-button">Data Pipelines (ETL, Ingestion, Validation, Warehousing, Transformation)</button>
+                    <button class="skill-button">Data Lake</button>
+                    <button class="skill-button">Data Governance &amp; Quality</button>
+                    <button class="skill-button">Git/GitHub/GitLab</button>
+                </div>
+            </div>
+        </section>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Path Navigation using Deep Q Learning</h3>
-                    <p><strong>Jan 2022 - Sep 2022</strong></p>
-                </div>
-                <p>An application developed using Kivy and PyTorch Framework. The application simulates an autonomous vehicle navigating a map I designed, complete with manually placed obstacles.</p>
-                <ul>
-                    <li>Used Deep Q Networks (DQNs) with relu activation functions for navigation.</li>
-                    <li>Designed a reward system to improve obstacle avoidance capabilities.</li>
-                    <li>Received approval for publication in ADCOM Volume 133.</li>
-                </ul>
-                <p class = "skill-button"> Machine Learning</p>
-                <p class = "skill-button"> NumPy</p>
-                <p class = "skill-button"> Python</p>
+        <section id="publication" class="panel reveal">
+            <div class="panel-header">
+                <h2>Publication</h2>
             </div>
+            <div class="panel-content">
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Performance within the Foundation Paradox</h3>
+                        <p>Feb 2026</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields</strong></p>
+                        <p>Submitted (In Progress)</p>
+                    </div>
+                    <p>Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss.</p>
+                </div>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Tournament Manager</h3>
-                    <p><strong>Jul 2021 - Nov 2021</strong></p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>An Automatic Path Navigation for Visually Challenged People using Deep Q Learning</h3>
+                        <p>Jan 2023</p>
+                    </div>
+                    <p><strong>Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218</strong></p>
+                    <p>Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance.</p>
                 </div>
-                <p>The Tournament Manager is a Java-based application designed to facilitate the efficient organization of sports tournaments.</p>
-                <ul>
-                    <li>Designed and configured tournaments for different divisions and sports.</li>
-                    <li>Streamlined team enrollment and player information updates.</li>
-                    <li>Developed using Java and MySQL.</li>
-                </ul>
-                <p class="skill-button"> Java</p>
             </div>
+        </section>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Harmful Comments Classifier</h3>
-                    <p><strong>Jan 2021 - Apr 2021</strong></p>
-                </div>
-                <p>The "Harmful Comments Classifier" is a Python-based Natural Language Processing (NLP) project, executed within the Google Colab environment.</p>
-                <ul>
-                    <li>Developed a deep learning model for classifying comments based on toxicity.</li>
-                    <li>Utilized embedding techniques, bi-directional LSTM, and dense models.</li>
-                    <li>Executed within the Google Colab environment.</li>
-                </ul>
-                <p class="skill-button"> Machine Learning</p>
-                <p class="skill-button"> Exploratory Data Analysis</p>
-                <p class="skill-button"> Data Science</p>
-                <p class="skill-button"> Data Analysis</p>
-                <p class="skill-button"> Python</p>
+        <section id="certification" class="panel reveal">
+            <div class="panel-header">
+                <h2>Certification</h2>
             </div>
+            <div class="panel-content">
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>AWS Certified Solutions Architect - Associate</h3>
+                        <p>Amazon Web Services (AWS)</p>
+                    </div>
+                    <p>Issued May 2025 - Expires May 2028</p>
+                    <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">Show Credential</a>
+                </div>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>EATERIO</h3>
-                    <p><strong>Jan 2020 - May 2020</strong></p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>AIG - Actuarial Analyst</h3>
+                        <p>Forage</p>
+                    </div>
+                    <p>Issued Sep 2025</p>
+                    <p>Credential ID: 6D2BARv5wgwb9AqEx</p>
+                    <p>Skills: Data Analysis, Visual Analytics</p>
+                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/4nAmAbTbHbnGMNSyo/b7MfbG9W4iCNGnd23_4nAmAbTbHbnGMNSyo_68c0c162a8bab8f37499f4fe_1757464209554_completion_certificate.pdf" class="link-button">Show Credential</a>
                 </div>
-                <p>"EATERIO" is a web application built using HTML, CSS, JavaScript, and MongoDB, designed to facilitate food ordering and management within organizations.</p>
-                <ul>
-                    <li>Streamlined the food ordering process within organizations.</li>
-                    <li>Developed using HTML, CSS, JavaScript, and MongoDB.</li>
-                    <li>Provided a user-friendly interface for placing and managing food orders.</li>
-                </ul>
-                <p class="skill-button"> HTML</p>
-                <p class="skill-button"> CSS</p>
-                <p class="skill-button"> JavaScript</p>
-                <p class="skill-button"> MongoDB</p>
-            </div>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Interactive Portfolio</h3>
-                    <p><strong>Next.js, TypeScript, Three.js, R3F, GraphQL, Hygraph</strong></p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>COEBC - Code of Ethical Business Conduct Training</h3>
+                        <p>CITI Program</p>
+                    </div>
+                    <p>Issued Jun 2024</p>
+                    <p>Credential ID: 60593265</p>
+                    <a href="https://www.citiprogram.org/verify/?wcbcd3d78-36dc-436e-9a18-03b7a65d2667-60593265" class="link-button">Show Credential</a>
                 </div>
-                <p>
-                    <a href="https://rahulbabu.netlify.app/" class="link-button">Live Demo</a>
-                    <a href="https://github.com/rahul-1415/Interactive-Portfolio" class="link-button">Code</a>
-                </p>
-                <ul>
-                    <li>Built and deployed an interactive 3D portfolio experience using Next.js and TypeScript with Three.js and React Three Fiber (Drei, Rapier) for immersive UI and animations.</li>
-                    <li>Integrated Hygraph (GraphCMS) using GraphQL and Apollo Client to manage portfolio content through a CMS-driven workflow.</li>
-                </ul>
-            </div>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>ClimateActionPolicy RAG Application</h3>
-                    <p><strong>Streamlit, LangChain, ChromaDB, LLaMA 3, Transformers</strong></p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>RCR - Graduate Student and Postdoctoral Researcher Responsible Conduct of Research</h3>
+                        <p>CITI Program</p>
+                    </div>
+                    <p>Issued Jun 2024</p>
+                    <p>Credential ID: 63090511</p>
+                    <a href="https://www.citiprogram.org/verify/?w58a49120-ed91-4173-a64b-7f0f572872e9-63090511" class="link-button">Show Credential</a>
                 </div>
-                <p>
-                    <a href="https://cap-rag.streamlit.app/" class="link-button">Live Demo</a>
-                    <a href="https://github.com/rahul-1415/CAP-RAG" class="link-button">Code</a>
-                </p>
-                <ul>
-                    <li>Deployed a Retrieval-Augmented Generation application that retrieves relevant policy documents and generates context-enriched responses for climate action recommendations.</li>
-                    <li>Built an interactive Streamlit chat interface with multi-session history so users can manage and review conversations.</li>
-                </ul>
-            </div>
 
-            <div class="project-box">
-                <div class="experience-header">
-                    <h3>Opioid Overdose Forecasting Data Visualizer</h3>
-                    <p><strong>React, TypeScript, FastAPI, Docker</strong></p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>IRB - Social &amp; Behavioral Research (Group 2)</h3>
+                        <p>CITI Program</p>
+                    </div>
+                    <p>Issued Jan 2024 - Expires Jan 2028</p>
+                    <p>Credential ID: 60593339</p>
+                    <a href="https://www.citiprogram.org/verify/?w71f8c2ca-2167-4717-9208-d58cdf528614-60593339" class="link-button">Show Credential</a>
                 </div>
-                <p>
-                    <a href="https://opioid-overdose-forecasting.netlify.app/" class="link-button">Live Demo</a>
-                    <a href="https://github.com/rahul-1415/Opioid-Overdose-Forecasting" class="link-button">Code</a>
-                </p>
-                <ul>
-                    <li>Developed an interactive web application to visualize Arizona opioid-risk data at the Census Block Group level using a FastAPI backend and React + TypeScript frontend.</li>
-                    <li>Designed backend filtering and API serving and packaged the system with a unified Dockerfile for streamlined deployment.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
 
-    <section id="publication">
-        <div class="container">
-            <h2>Publication</h2>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>Performance within the Foundation Paradox</h3>
-                    <p>Feb 2026</p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Computer Architecture and Computer Organization Masterclass</h3>
+                        <p>Udemy</p>
+                    </div>
+                    <p>Issued Feb 2024</p>
+                    <p>Credential ID: UC-4a6796d5-5009-4e25-af33-bcd88d61649b</p>
+                    <p>Skills: Computer Architecture</p>
+                    <a href="https://www.udemy.com/certificate/UC-4a6796d5-5009-4e25-af33-bcd88d61649b/" class="link-button">Show Credential</a>
                 </div>
-                <div class="role-header">
-                    <p><strong>The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields</strong></p>
-                    <p>Submitted (In Progress)</p>
-                </div>
-                <p>Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss.</p>
-            </div>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>An Automatic Path Navigation for Visually Challenged People using Deep Q Learning</h3>
-                    <p>Jan 2023</p>
-                </div>
-                <p><strong>Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218</strong></p>
-                <p>Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance.</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>Arizona State University</h3>
-                    <p>Tempe, AZ, USA</p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Applied Data Science Capstone</h3>
+                        <p>Coursera</p>
+                    </div>
+                    <p>Issued Aug 2023</p>
+                    <p>Credential ID: 4LQXS9ZN4373</p>
+                    <p>Skills: Exploratory Data Analysis, Visual Analytics, Data Science, Data Analysis</p>
+                    <a href="https://www.coursera.org/verify/4LQXS9ZN4373" class="link-button">Show Credential</a>
                 </div>
-                <div class="role-header">
-                    <p><strong>Master of Science in Computer Science</strong></p>
-                    <p>Aug 2023 - May 2025</p>
-                </div>
-                <p>CGPA: 3.83/4</p>
-            </div>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>Madras Institute of Technology, Anna University</h3>
-                    <p>Chennai, TN, India</p>
-                </div>
-                <div class="role-header">
-                    <p><strong>Bachelor of Engineering in Computer Science</strong></p>
-                    <p>July 2019 - June 2023</p>
-                </div>
-                <p>CGPA: 8.69/10</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="certification">
-        <div class="container">
-            <h2>Certification</h2>
-            <div class="experience-box">
-                <div class="experience-header">
-                    <h3>AWS Certified Solutions Architect - Associate</h3>
-                    <p>June 2025</p>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Foundations of User Experience (UX) Design</h3>
+                        <p>Coursera</p>
+                    </div>
+                    <p>Issued Aug 2023</p>
+                    <p>Credential ID: LMHXK6GDTHZ9</p>
+                    <p>Skills: User Experience (UX), Wireframing</p>
+                    <a href="https://www.coursera.org/verify/LMHXK6GDTHZ9" class="link-button">Show Credential</a>
                 </div>
-                <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">Verify Credential</a>
+
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>DevOps Beginners to Advanced with Projects - 2023</h3>
+                        <p>Udemy</p>
+                    </div>
+                    <p>Issued Aug 2023</p>
+                    <p>Credential ID: UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9</p>
+                    <p>Skills: Scripting, Docker, Linux, Kubernetes, Amazon Web Services (AWS)</p>
+                    <a href="https://www.udemy.com/certificate/UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9/" class="link-button">Show Credential</a>
+                </div>
+
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Angular - The Complete Guide (2023 Edition)</h3>
+                        <p>Udemy</p>
+                    </div>
+                    <p>Issued Jun 2023</p>
+                    <p>Credential ID: UC-1bc4bd69-2022-4696-a861-135f3688bb57</p>
+                    <p>Skills: AngularJS, Microsoft Visual Studio Code, Angular</p>
+                    <a href="https://www.udemy.com/certificate/UC-1bc4bd69-2022-4696-a861-135f3688bb57/" class="link-button">Show Credential</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Contact</h2>
-            <p><i class="fas fa-envelope"></i> 
-                <a href="mailto:rahulb1407@gmail.com" style="color: #fff;">rahulbabu1407@gmail.com</a></p>
-            <p><i class="fas fa-phone"></i>
-                <a href="tel:+16025171962" style="color: #fff;">+1 (602) 517-1962</a></p>
-            <p><i class="fas fa-globe"></i>
-                <a href="https://rahul-1415.github.io/" style="color: #fff;">rahul-1415.github.io</a></p>
-        </div>
-    </section>
+        <section id="education" class="panel reveal">
+            <div class="panel-header">
+                <h2>Education</h2>
+            </div>
+            <div class="panel-content">
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Arizona State University</h3>
+                        <p>Tempe, AZ, USA</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>Master of Science in Computer Science</strong></p>
+                        <p>Aug 2023 - May 2025</p>
+                    </div>
+                    <p>CGPA: 3.83/4</p>
+                </div>
 
-        <button onclick="topFunction()" id="backToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+                <div class="experience-box">
+                    <div class="experience-header">
+                        <h3>Madras Institute of Technology, Anna University</h3>
+                        <p>Chennai, TN, India</p>
+                    </div>
+                    <div class="role-header">
+                        <p><strong>Bachelor of Engineering in Computer Science</strong></p>
+                        <p>July 2019 - June 2023</p>
+                    </div>
+                    <p>CGPA: 8.69/10</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="panel reveal">
+            <div class="panel-header">
+                <h2>Contact</h2>
+                <p class="panel-kicker">Open to Roles and Collaboration</p>
+            </div>
+            <div class="panel-content contact-list">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:rahulb1407@gmail.com">rahulbabu1407@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> <a href="tel:+16025171962">+1 (602) 517-1962</a></p>
+                <p><i class="fas fa-globe"></i> <a href="https://rahul-1415.github.io/">rahul-1415.github.io</a></p>
+            </div>
+        </section>
+    </main>
+
+    <button onclick="topFunction()" id="backToTopBtn" title="Go to top" aria-label="Go to top"><i class="fas fa-arrow-up"></i></button>
+
     <footer>
         <p>&copy; 2024 Rahul Babu</p>
     </footer>
 
     <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-<df-messenger
-  project-id="rahul-babu-chatbot"
-  agent-id="fb338710-7a86-44cb-8faf-828277158598"
-  language-code="en"
-  max-query-length="-1">
-  <df-messenger-chat-bubble
-    chat-title="rahul-babu-chat-agent">
-  </df-messenger-chat-bubble>
-</df-messenger>
-<style>
-  df-messenger {
-    z-index: 999;
-    position: fixed;
-    --df-messenger-font-color: #000;
-    --df-messenger-font-family: Google Sans;
-    --df-messenger-chat-background: #f3f6fc;
-    --df-messenger-message-user-background: #d3e3fd;
-    --df-messenger-message-bot-background: #fff;
-    bottom: 16px;
-    right: 16px;
-  }
-</style>
+    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+    <df-messenger
+      project-id="rahul-babu-chatbot"
+      agent-id="fb338710-7a86-44cb-8faf-828277158598"
+      language-code="en"
+      max-query-length="-1">
+      <df-messenger-chat-bubble chat-title="rahul-babu-chat-agent"></df-messenger-chat-bubble>
+    </df-messenger>
+
+    <style>
+      df-messenger {
+        z-index: 70;
+        position: fixed;
+        --df-messenger-font-color: #f7f7fb;
+        --df-messenger-font-family: "Space Grotesk";
+        --df-messenger-chat-background: #111726;
+        --df-messenger-message-user-background: #3a2b17;
+        --df-messenger-message-bot-background: #1b2337;
+        --df-messenger-button-titlebar-color: #2b344f;
+        --df-messenger-send-icon: #ffb86b;
+        bottom: 18px;
+        right: 18px;
+      }
+
+      @media (max-width: 767px) {
+        df-messenger {
+          bottom: 14px;
+          right: 12px;
+          --df-messenger-chat-window-height: 62vh;
+          --df-messenger-chat-window-width: 86vw;
+        }
+      }
+    </style>
+
+    <script>
+      (function () {
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
+        const backToTopButton = document.getElementById('backToTopBtn');
+
+        function toggleBackToTopButton() {
+          if (!backToTopButton) {
+            return;
+          }
+          backToTopButton.style.display = window.scrollY > 320 ? 'grid' : 'none';
+        }
+
+        window.topFunction = function topFunction() {
+          window.scrollTo({
+            top: 0,
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+          });
+        };
+
+        window.addEventListener('scroll', toggleBackToTopButton, { passive: true });
+        toggleBackToTopButton();
+
+        const filterChips = Array.from(document.querySelectorAll('.filter-chip'));
+        const projectCards = Array.from(document.querySelectorAll('#projectList .project-box'));
+        const projectStatus = document.getElementById('projectStatus');
+        const projectEmpty = document.getElementById('projectEmpty');
+
+        function applyProjectFilter(filterValue) {
+          let visibleCount = 0;
+
+          projectCards.forEach((card) => {
+            const tags = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
+            const isVisible = filterValue === 'all' || tags.includes(filterValue);
+
+            card.hidden = !isVisible;
+            card.setAttribute('aria-hidden', String(!isVisible));
+
+            if (isVisible) {
+              visibleCount += 1;
+            }
+          });
+
+          if (projectStatus) {
+            projectStatus.textContent = visibleCount === 1 ? '1 project shown' : visibleCount + ' projects shown';
+          }
+
+          if (projectEmpty) {
+            projectEmpty.hidden = visibleCount !== 0;
+          }
+        }
+
+        filterChips.forEach((chip) => {
+          chip.addEventListener('click', function () {
+            const selectedFilter = chip.dataset.filter || 'all';
+            filterChips.forEach((button) => {
+              button.setAttribute('aria-pressed', String(button === chip));
+            });
+            applyProjectFilter(selectedFilter);
+          });
+        });
+
+        applyProjectFilter('all');
+
+        const counterElements = Array.from(document.querySelectorAll('[data-counter-target]'));
+
+        function setCountersToTarget() {
+          counterElements.forEach((element) => {
+            element.textContent = String(Number(element.dataset.counterTarget || '0'));
+          });
+        }
+
+        function animateCounters() {
+          counterElements.forEach((element) => {
+            const target = Number(element.dataset.counterTarget || '0');
+            const duration = 900;
+            const start = performance.now();
+
+            function update(now) {
+              const progress = Math.min(1, (now - start) / duration);
+              const currentValue = Math.floor(progress * target);
+              element.textContent = String(currentValue);
+
+              if (progress < 1) {
+                requestAnimationFrame(update);
+              } else {
+                element.textContent = String(target);
+              }
+            }
+
+            requestAnimationFrame(update);
+          });
+        }
+
+        if (counterElements.length) {
+          if (prefersReducedMotion || isMobile) {
+            setCountersToTarget();
+          } else {
+            const statsGrid = document.querySelector('.stats-grid');
+            if (statsGrid && 'IntersectionObserver' in window) {
+              const counterObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                    animateCounters();
+                    observer.disconnect();
+                  }
+                });
+              }, { threshold: 0.34 });
+
+              counterObserver.observe(statsGrid);
+            } else {
+              setCountersToTarget();
+            }
+          }
+        }
+
+        const revealElements = Array.from(document.querySelectorAll('.reveal'));
+
+        if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+          revealElements.forEach((element) => {
+            element.classList.add('is-visible');
+          });
+        } else {
+          revealElements.forEach((element, index) => {
+            element.dataset.revealDelay = String(Math.min(index * 70, 350));
+          });
+
+          const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const delay = Number(entry.target.dataset.revealDelay || '0');
+                window.setTimeout(() => {
+                  entry.target.classList.add('is-visible');
+                }, delay);
+                observer.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.14 });
+
+          revealElements.forEach((element) => {
+            revealObserver.observe(element);
+          });
+        }
+
+        const canTilt = !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+        if (canTilt) {
+          projectCards.forEach((card) => {
+            const maxTilt = 4;
+
+            function resetTilt() {
+              card.style.setProperty('--rx', '0deg');
+              card.style.setProperty('--ry', '0deg');
+            }
+
+            card.addEventListener('pointermove', (event) => {
+              const rect = card.getBoundingClientRect();
+              const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+              const y = ((event.clientY - rect.top) / rect.height) * 2 - 1;
+              const rotateX = (-y * maxTilt).toFixed(2);
+              const rotateY = (x * maxTilt).toFixed(2);
+
+              card.style.setProperty('--rx', rotateX + 'deg');
+              card.style.setProperty('--ry', rotateY + 'deg');
+            });
+
+            card.addEventListener('pointerleave', resetTilt);
+            card.addEventListener('pointerup', resetTilt);
+          });
+        }
+      })();
+    </script>
 </body>
 </html>
