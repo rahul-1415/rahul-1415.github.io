@@ -162,6 +162,9 @@
                 <li><a href="#experience">Work Experience</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#publication">Publication</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#certification">Certification</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -183,8 +186,13 @@
             <p>
                 Core Skills: Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, AWS (EC2, RDS, S3, Glue, ECS), Docker, CI/CD. Certification: AWS Solutions Architect – Associate.
             </p>
+            <p>
+                I have 3 years of experience building AI-driven full-stack applications and analytics solutions using React, JavaScript, Python, and Java. I have also deployed containerized microservices on AWS (EC2, RDS, S3, DocumentDB) with CI/CD and monitoring through CloudWatch.
+            </p>
             <a href="https://github.com/rahul-1415" class="link-button">GitHub</a>
             <a href="https://www.linkedin.com/in/rahulb1407/" class="link-button">LinkedIn</a>
+            <a href="https://rahul-1415.github.io/" class="link-button">Portfolio</a>
+            <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">AWS Certification</a>
         </div>
     </section>
 
@@ -207,6 +215,8 @@
                     <li>Integrated frontend modules with backend services via RESTful APIs, implementing reliable data fetching, loading states, and error handling for daily user workflows.</li>
                     <li>Developed Python-based image processing utilities to power an AI “Animated GIF” feature (sprite sheet slicing, pixelation with PIL, GIF assembly with imageio), delivering animated outputs from text prompts.</li>
                     <li>Implemented dark mode with persisted user preferences and OS theme sync, and integrated native desktop notifications via Electron APIs to ensure alerts triggered reliably even when the app was minimized.</li>
+                    <li>Implemented a hybrid backend communication layer using Node.js with REST (HTTP) APIs and WebSockets to stream real-time Outlook notifications and support AI-generated responses.</li>
+                    <li>Built and maintained an Electron + Node.js desktop app with tabbed and multi-view navigation using JavaScript, HTML5, and CSS3 to support notification and workflow management.</li>
                 </ul>
             </div>
             <div class="experience-box">
@@ -225,6 +235,26 @@
                     <li>Developed backend API services using FastAPI to serve dashboard data, enabling low-latency access for real-time filtering and visualization.</li>
                     <li>Automated large-scale data collection using Python and Selenium, gathering 1,000+ healthcare survey responses and 795 climate policy documents, followed by structured analysis and evaluation to measure LLM resilience on heat and healthcare prompts.</li>
                     <li>Deployed a RAG-based chatbot using Llama 3, LangChain, and Chroma on Jetstream2 HPC to summarize 100+ interview transcripts for the Maricopa Association of Governments and support ASU’s LLM resilience research with climate policy recommendations.</li></li>
+                    <li>Performed geospatial opioid risk analysis using PostGIS by writing spatial SQL queries (proximity and region joins, hotspot-style aggregations) to map overdose patterns and generate region-level insights for the dashboard.</li>
+                </ul>
+            </div>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>InnoHat Systems</h3>
+                    <p>Chennai, TN, India</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>Software Developer</strong></p>
+                    <p>Jan 2022 - July 2023</p>
+                </div>
+                <ul>
+                    <li>Designed hybrid storage using PostgreSQL for transactions and MongoDB for product metadata and user reviews, reducing schema-change overhead while keeping financial data ACID-compliant.</li>
+                    <li>Built Flask REST APIs for checkout, refunds, and shipment events, with 200+ test cases in pytest to reach 85% coverage and reduce regression bugs.</li>
+                    <li>Orchestrated ETL pipelines in Python (pandas, SQLAlchemy, and PyMongo) to merge order history with review sentiment data, optimizing runtime by 40% on 20M+ rows and 5M+ documents.</li>
+                    <li>Containerized services with Docker and deployed on AWS (EC2, RDS, S3, DocumentDB) with CloudWatch monitoring to maintain stability during seasonal traffic spikes.</li>
+                    <li>Developed a Django admin panel for managing promotions, vendors, and warehouse sync, replacing manual spreadsheet workflows and reducing operations effort by 12 hours per week.</li>
+                    <li>Created a React.js customer portal for browsing catalogs and personalized deals, integrating cache and lazy loading to reduce page load time by 35%.</li>
+                    <li>Trained a scikit-learn recommendation engine using transactional PostgreSQL and behavioral MongoDB data, improving upsell conversion by 11% in pilot rollout.</li>
                 </ul>
             </div>
         </div>
@@ -238,6 +268,7 @@
                 <button class="skill-button">Django</button>
                 <button class="skill-button">Flask</button>
                 <button class="skill-button">FastAPI</button>
+                <button class="skill-button">Java</button>
                 <button class="skill-button">RESTful API Development</button>
                 <button class="skill-button">Microservices</button>
                 <button class="skill-button">Scalability</button>
@@ -403,6 +434,117 @@
                 <p class="skill-button"> JavaScript</p>
                 <p class="skill-button"> MongoDB</p>
             </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Interactive Portfolio</h3>
+                    <p><strong>Next.js, TypeScript, Three.js, R3F, GraphQL, Hygraph</strong></p>
+                </div>
+                <p>
+                    <a href="https://rahulbabu.netlify.app/" class="link-button">Live Demo</a>
+                    <a href="https://github.com/rahul-1415/Interactive-Portfolio" class="link-button">Code</a>
+                </p>
+                <ul>
+                    <li>Built and deployed an interactive 3D portfolio experience using Next.js and TypeScript with Three.js and React Three Fiber (Drei, Rapier) for immersive UI and animations.</li>
+                    <li>Integrated Hygraph (GraphCMS) using GraphQL and Apollo Client to manage portfolio content through a CMS-driven workflow.</li>
+                </ul>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>ClimateActionPolicy RAG Application</h3>
+                    <p><strong>Streamlit, LangChain, ChromaDB, LLaMA 3, Transformers</strong></p>
+                </div>
+                <p>
+                    <a href="https://cap-rag.streamlit.app/" class="link-button">Live Demo</a>
+                    <a href="https://github.com/rahul-1415/CAP-RAG" class="link-button">Code</a>
+                </p>
+                <ul>
+                    <li>Deployed a Retrieval-Augmented Generation application that retrieves relevant policy documents and generates context-enriched responses for climate action recommendations.</li>
+                    <li>Built an interactive Streamlit chat interface with multi-session history so users can manage and review conversations.</li>
+                </ul>
+            </div>
+
+            <div class="project-box">
+                <div class="experience-header">
+                    <h3>Opioid Overdose Forecasting Data Visualizer</h3>
+                    <p><strong>React, TypeScript, FastAPI, Docker</strong></p>
+                </div>
+                <p>
+                    <a href="https://opioid-overdose-forecasting.netlify.app/" class="link-button">Live Demo</a>
+                    <a href="https://github.com/rahul-1415/Opioid-Overdose-Forecasting" class="link-button">Code</a>
+                </p>
+                <ul>
+                    <li>Developed an interactive web application to visualize Arizona opioid-risk data at the Census Block Group level using a FastAPI backend and React + TypeScript frontend.</li>
+                    <li>Designed backend filtering and API serving and packaged the system with a unified Dockerfile for streamlined deployment.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="publication">
+        <div class="container">
+            <h2>Publication</h2>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>Performance within the Foundation Paradox</h3>
+                    <p>Feb 2026</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields</strong></p>
+                    <p>Submitted (In Progress)</p>
+                </div>
+                <p>Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss.</p>
+            </div>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>An Automatic Path Navigation for Visually Challenged People using Deep Q Learning</h3>
+                    <p>Jan 2023</p>
+                </div>
+                <p><strong>Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218</strong></p>
+                <p>Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <div class="container">
+            <h2>Education</h2>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>Arizona State University</h3>
+                    <p>Tempe, AZ, USA</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>Master of Science in Computer Science</strong></p>
+                    <p>Aug 2023 - May 2025</p>
+                </div>
+                <p>CGPA: 3.83/4</p>
+            </div>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>Madras Institute of Technology, Anna University</h3>
+                    <p>Chennai, TN, India</p>
+                </div>
+                <div class="role-header">
+                    <p><strong>Bachelor of Engineering in Computer Science</strong></p>
+                    <p>July 2019 - June 2023</p>
+                </div>
+                <p>CGPA: 8.69/10</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="certification">
+        <div class="container">
+            <h2>Certification</h2>
+            <div class="experience-box">
+                <div class="experience-header">
+                    <h3>AWS Certified Solutions Architect - Associate</h3>
+                    <p>June 2025</p>
+                </div>
+                <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">Verify Credential</a>
+            </div>
         </div>
     </section>
 
@@ -411,6 +553,10 @@
             <h2>Contact</h2>
             <p><i class="fas fa-envelope"></i> 
                 <a href="mailto:rahulb1407@gmail.com" style="color: #fff;">rahulbabu1407@gmail.com</a></p>
+            <p><i class="fas fa-phone"></i>
+                <a href="tel:+16025171962" style="color: #fff;">+1 (602) 517-1962</a></p>
+            <p><i class="fas fa-globe"></i>
+                <a href="https://rahul-1415.github.io/" style="color: #fff;">rahul-1415.github.io</a></p>
         </div>
     </section>
 
