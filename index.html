@@ -6,6 +6,7 @@
     <title>Rahul Babu</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='220 0 16 16%22'><text y='2214'22 font-size=`2216`22>😊</text></svg>">
 
     <style>
@@ -465,6 +466,101 @@
             outline: none;
         }
 
+        .contact-widget {
+            position: fixed;
+            right: 18px;
+            bottom: 10px;
+            z-index: 70;
+            width: 12%;
+        }
+
+        .contact-widget-panel {
+            width: 100%;
+            border: 1px solid rgba(255, 184, 107, 0.36);
+            border-radius: 14px;
+            background: rgba(19, 25, 40, 0.97);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.36);
+            padding: 0.75rem;
+            display: grid;
+            gap: 0.58rem;
+            max-height: calc(100vh - 136px);
+            overflow: auto;
+        }
+
+        .contact-widget-heading {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 0.55rem;
+        }
+
+        .contact-widget-title {
+            margin: 0;
+            color: var(--text);
+            font-size: 0.85rem;
+            font-family: "JetBrains Mono", monospace;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .contact-widget-form {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .contact-widget-input,
+        .contact-widget-textarea {
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            padding: 0.5rem 0.6rem;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 0.88rem;
+        }
+
+        .contact-widget-input::placeholder,
+        .contact-widget-textarea::placeholder {
+            color: #95a1b7;
+        }
+
+        .contact-widget-input:focus-visible,
+        .contact-widget-textarea:focus-visible {
+            outline: 2px solid rgba(255, 184, 107, 0.65);
+            outline-offset: 1px;
+        }
+
+        .contact-widget-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .contact-widget-submit {
+            justify-self: start;
+            border: 1px solid rgba(255, 184, 107, 0.78);
+            border-radius: 999px;
+            background: rgba(255, 184, 107, 0.16);
+            color: #ffd3a3;
+            padding: 0.45rem 0.82rem;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.78rem;
+            cursor: pointer;
+        }
+
+        .contact-widget-submit:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+
+        .contact-widget-status {
+            margin: 0;
+            font-size: 0.76rem;
+            color: #b8c2d7;
+            min-height: 1.1em;
+            font-family: "JetBrains Mono", monospace;
+        }
+
         .reveal {
             opacity: 0;
             --reveal-y: 16px;
@@ -483,7 +579,8 @@
         #backToTopBtn {
             display: none;
             position: fixed;
-            right: 24px;
+            right: auto;
+            left: min(calc(50% + (min(1120px, 92vw) / 2) + 12px), calc(100vw - 56px));
             bottom: 26px;
             z-index: 80;
             width: 44px;
@@ -569,8 +666,19 @@
             }
 
             #backToTopBtn {
+                left: auto;
                 right: 14px;
                 bottom: 82px;
+            }
+
+            .contact-widget {
+                top: 92px;
+                right: 12px;
+                width: min(420px, 94vw);
+            }
+
+            .contact-widget-panel {
+                max-height: calc(100vh - 108px);
             }
         }
 
@@ -600,7 +708,7 @@
             <h1>Rahul Babu</h1>
             <nav>
                 <ul>
-                    <li><a href="#about">Intro</a></li>
+                    <li><a href="#about">About</a></li>
                     <li><a href="#education">Education</a></li>
                     <li><a href="#experience">Experience</a></li>
                     <li><a href="#publication">Publication</a></li>
@@ -1295,7 +1403,7 @@
             <div class="panel-content contact-list">
                 <p><i class="fas fa-envelope"></i> <a href="mailto:rahulb1407@gmail.com">rahulbabu1407@gmail.com</a></p>
                 <p><i class="fas fa-phone"></i> <a href="tel:+16025171962">+1 (602) 517-1962</a></p>
-                <p><i class="fas fa-globe"></i> <a href="https://rahul-1415.github.io/">rahul-1415.github.io</a></p>
+                <p><i class="fas fa-globe"></i> <a href="https://www.linkedin.com/in/rahulb1407/">linkedin.com/in/rahulb1407/</a></p>
             </div>
         </section>
     </main>
@@ -1303,43 +1411,24 @@
     <button onclick="topFunction()" id="backToTopBtn" title="Go to top" aria-label="Go to top"><i class="fas fa-arrow-up"></i></button>
 
     <footer>
-        <p>&copy; 2024 Rahul Babu</p>
+        <p></p>
     </footer>
 
-    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-    <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-    <df-messenger
-      project-id="rahul-babu-chatbot"
-      agent-id="fb338710-7a86-44cb-8faf-828277158598"
-      language-code="en"
-      max-query-length="-1">
-      <df-messenger-chat-bubble chat-title="rahul-babu-chat-agent"></df-messenger-chat-bubble>
-    </df-messenger>
-
-    <style>
-      df-messenger {
-        z-index: 70;
-        position: fixed;
-        --df-messenger-font-color: #f7f7fb;
-        --df-messenger-font-family: "Space Grotesk";
-        --df-messenger-chat-background: #111726;
-        --df-messenger-message-user-background: #3a2b17;
-        --df-messenger-message-bot-background: #1b2337;
-        --df-messenger-button-titlebar-color: #2b344f;
-        --df-messenger-send-icon: #ffb86b;
-        bottom: 18px;
-        right: 18px;
-      }
-
-      @media (max-width: 767px) {
-        df-messenger {
-          bottom: 14px;
-          right: 12px;
-          --df-messenger-chat-window-height: 62vh;
-          --df-messenger-chat-window-width: 86vw;
-        }
-      }
-    </style>
+    <div class="contact-widget" aria-label="Quick contact form">
+        <div id="contactWidgetPanel" class="contact-widget-panel">
+            <div class="contact-widget-heading">
+                <p class="contact-widget-title">Send a Message</p>
+            </div>
+            <form id="contactWidgetForm" class="contact-widget-form">
+                <input class="contact-widget-input" type="text" name="name" placeholder="Your name" required>
+                <input class="contact-widget-input" type="email" name="email" placeholder="Your email" required>
+                <input class="contact-widget-input" type="text" name="subject" placeholder="Subject" required>
+                <textarea class="contact-widget-textarea" name="message" placeholder="Your message" required></textarea>
+                <button id="contactWidgetSubmit" class="contact-widget-submit" type="submit">Send Email</button>
+            </form>
+            <p id="contactWidgetStatus" class="contact-widget-status" aria-live="polite"></p>
+        </div>
+    </div>
 
     <script>
       (function () {
@@ -1364,6 +1453,66 @@
 
         window.addEventListener('scroll', toggleBackToTopButton, { passive: true });
         toggleBackToTopButton();
+
+        const contactWidgetForm = document.getElementById('contactWidgetForm');
+        const contactWidgetStatus = document.getElementById('contactWidgetStatus');
+        const contactWidgetSubmit = document.getElementById('contactWidgetSubmit');
+        // Configure these from EmailJS (use an SMTP-backed service in your EmailJS dashboard).
+        const emailJsConfig = {
+          publicKey: 'ehaEZklqfMNVr8mzv',
+          serviceId: 'service_uzawzs3',
+          templateId: 'template_6etiqxg'
+        };
+        const emailJsConfigured = Object.values(emailJsConfig).every((value) => {
+          return typeof value === 'string' && value.length > 0 && !value.startsWith('YOUR_');
+        });
+
+        if (window.emailjs && emailJsConfigured) {
+          try {
+            window.emailjs.init({
+              publicKey: emailJsConfig.publicKey
+            });
+          } catch (error) {
+            console.error('EmailJS init failed:', error);
+          }
+        }
+        if (contactWidgetForm && contactWidgetStatus && contactWidgetSubmit) {
+          contactWidgetForm.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            contactWidgetStatus.textContent = '';
+            contactWidgetSubmit.disabled = true;
+
+            const formData = new FormData(contactWidgetForm);
+            const name = String(formData.get('name') || '').trim();
+            const email = String(formData.get('email') || '').trim();
+            const subject = String(formData.get('subject') || '').trim();
+            const message = String(formData.get('message') || '').trim();
+
+            if (!window.emailjs || !emailJsConfigured) {
+              contactWidgetStatus.textContent = 'Email service is not configured yet. Update EmailJS keys in index.html.';
+              contactWidgetSubmit.disabled = false;
+              return;
+            }
+
+            try {
+              await window.emailjs.send(emailJsConfig.serviceId, emailJsConfig.templateId, {
+                from_name: name,
+                from_email: email,
+                reply_to: email,
+                subject: subject,
+                message: message,
+                to_email: 'rahulbabu1407@gmail.com'
+              });
+
+              contactWidgetStatus.textContent = 'Message sent successfully.';
+              contactWidgetForm.reset();
+            } catch (error) {
+              contactWidgetStatus.textContent = 'Unable to send right now. Please email rahulbabu1407@gmail.com.';
+            } finally {
+              contactWidgetSubmit.disabled = false;
+            }
+          });
+        }
 
         const filterChips = Array.from(document.querySelectorAll('.filter-chip'));
         const projectCards = Array.from(document.querySelectorAll('#projectList .project-box'));
