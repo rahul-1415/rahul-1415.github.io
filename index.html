@@ -62,6 +62,90 @@
             color: inherit;
         }
 
+        html.custom-cursor-enabled body {
+            cursor: none;
+        }
+
+        html.custom-cursor-enabled a,
+        html.custom-cursor-enabled button,
+        html.custom-cursor-enabled [role="button"],
+        html.custom-cursor-enabled .filter-chip,
+        html.custom-cursor-enabled .link-button,
+        html.custom-cursor-enabled .project-box {
+            cursor: none !important;
+        }
+
+        html.custom-cursor-enabled input,
+        html.custom-cursor-enabled textarea,
+        html.custom-cursor-enabled select {
+            cursor: text;
+        }
+
+        .depth-cursor {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 130;
+        }
+
+        .depth-cursor__core,
+        .depth-cursor__ring,
+        .depth-cursor__glow {
+            position: fixed;
+            left: 0;
+            top: 0;
+            transform: translate3d(-120px, -120px, 0);
+            border-radius: 50%;
+            pointer-events: none;
+            will-change: transform, opacity;
+            transition: opacity 0.2s ease, filter 0.2s ease, border-color 0.2s ease;
+        }
+
+        .depth-cursor__core {
+            width: 9px;
+            height: 9px;
+            background: rgba(255, 184, 107, 0.98);
+            box-shadow: 0 0 12px rgba(255, 184, 107, 0.65);
+        }
+
+        .depth-cursor__ring {
+            width: 30px;
+            height: 30px;
+            border: 1px solid rgba(255, 184, 107, 0.66);
+            box-shadow: 0 0 18px rgba(255, 184, 107, 0.22);
+        }
+
+        .depth-cursor__glow {
+            width: 64px;
+            height: 64px;
+            background: radial-gradient(circle, rgba(255, 184, 107, 0.24) 0%, rgba(255, 184, 107, 0.04) 48%, transparent 72%);
+            filter: blur(1px);
+            opacity: 0.75;
+        }
+
+        .depth-cursor.is-hidden .depth-cursor__core,
+        .depth-cursor.is-hidden .depth-cursor__ring,
+        .depth-cursor.is-hidden .depth-cursor__glow {
+            opacity: 0;
+        }
+
+        .depth-cursor.is-active .depth-cursor__ring {
+            border-color: rgba(255, 184, 107, 0.96);
+        }
+
+        .depth-cursor.is-active .depth-cursor__glow {
+            opacity: 0.9;
+            filter: blur(0.4px);
+        }
+
+        .depth-cursor.is-pressed .depth-cursor__ring {
+            border-color: rgba(255, 184, 107, 0.9);
+        }
+
+        .depth-cursor.is-pressed .depth-cursor__glow {
+            opacity: 0.65;
+        }
+
         header {
             position: sticky;
             top: 0;
@@ -682,6 +766,12 @@
             }
         }
 
+        @media (hover: none), (pointer: coarse) {
+            .depth-cursor {
+                display: none !important;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
@@ -698,6 +788,10 @@
                 opacity: 1 !important;
                 transform: none !important;
                 --reveal-y: 0px !important;
+            }
+
+            .depth-cursor {
+                display: none !important;
             }
         }
     </style>
@@ -1430,10 +1524,17 @@
         </div>
     </div>
 
+    <div id="depthCursor" class="depth-cursor is-hidden" aria-hidden="true">
+        <span class="depth-cursor__glow"></span>
+        <span class="depth-cursor__ring"></span>
+        <span class="depth-cursor__core"></span>
+    </div>
+
     <script>
       (function () {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const isMobile = window.matchMedia('(max-width: 767px)').matches;
+        const canUseDepthCursor = !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
         const backToTopButton = document.getElementById('backToTopBtn');
 
@@ -1453,6 +1554,90 @@
 
         window.addEventListener('scroll', toggleBackToTopButton, { passive: true });
         toggleBackToTopButton();
+
+        if (canUseDepthCursor) {
+          const depthCursor = document.getElementById('depthCursor');
+          const cursorCore = depthCursor ? depthCursor.querySelector('.depth-cursor__core') : null;
+          const cursorRing = depthCursor ? depthCursor.querySelector('.depth-cursor__ring') : null;
+          const cursorGlow = depthCursor ? depthCursor.querySelector('.depth-cursor__glow') : null;
+
+          if (depthCursor && cursorCore && cursorRing && cursorGlow) {
+            document.documentElement.classList.add('custom-cursor-enabled');
+
+            let pointerX = window.innerWidth * 0.5;
+            let pointerY = window.innerHeight * 0.5;
+            let coreX = pointerX;
+            let coreY = pointerY;
+            let ringX = pointerX;
+            let ringY = pointerY;
+            let glowX = pointerX;
+            let glowY = pointerY;
+            let isActiveTarget = false;
+            let isPressed = false;
+
+            const interactiveSelector = 'a, button, .link-button, .filter-chip, .project-box, input, textarea, select, [role="button"]';
+
+            function clamp(value, min, max) {
+              return Math.min(max, Math.max(min, value));
+            }
+
+            function syncInteractionState(target) {
+              isActiveTarget = Boolean(target && target.closest(interactiveSelector));
+              depthCursor.classList.toggle('is-active', isActiveTarget);
+            }
+
+            document.addEventListener('pointermove', function (event) {
+              pointerX = event.clientX;
+              pointerY = event.clientY;
+              syncInteractionState(event.target);
+              depthCursor.classList.remove('is-hidden');
+            }, { passive: true });
+
+            document.addEventListener('pointerdown', function () {
+              isPressed = true;
+              depthCursor.classList.add('is-pressed');
+            }, { passive: true });
+
+            document.addEventListener('pointerup', function () {
+              isPressed = false;
+              depthCursor.classList.remove('is-pressed');
+            }, { passive: true });
+
+            document.addEventListener('pointerleave', function () {
+              depthCursor.classList.add('is-hidden');
+            }, { passive: true });
+
+            window.addEventListener('blur', function () {
+              depthCursor.classList.add('is-hidden');
+            });
+
+            function animateDepthCursor() {
+              coreX += (pointerX - coreX) * 0.42;
+              coreY += (pointerY - coreY) * 0.42;
+              ringX += (pointerX - ringX) * 0.24;
+              ringY += (pointerY - ringY) * 0.24;
+              glowX += (pointerX - glowX) * 0.16;
+              glowY += (pointerY - glowY) * 0.16;
+
+              const velocityX = pointerX - glowX;
+              const velocityY = pointerY - glowY;
+              const depthX = clamp(velocityX * 0.08, -14, 14);
+              const depthY = clamp(velocityY * 0.08, -14, 14);
+
+              const coreScale = isPressed ? 0.75 : isActiveTarget ? 1.16 : 1;
+              const ringScale = isPressed ? 0.88 : isActiveTarget ? 1.24 : 1;
+              const glowScale = isPressed ? 0.92 : isActiveTarget ? 1.2 : 1;
+
+              cursorCore.style.transform = 'translate3d(' + coreX.toFixed(2) + 'px, ' + coreY.toFixed(2) + 'px, 0) translate(-50%, -50%) scale(' + coreScale.toFixed(3) + ')';
+              cursorRing.style.transform = 'translate3d(' + (ringX + depthX * 0.35).toFixed(2) + 'px, ' + (ringY + depthY * 0.35).toFixed(2) + 'px, 0) translate(-50%, -50%) scale(' + ringScale.toFixed(3) + ')';
+              cursorGlow.style.transform = 'translate3d(' + (glowX + depthX).toFixed(2) + 'px, ' + (glowY + depthY).toFixed(2) + 'px, 0) translate(-50%, -50%) scale(' + glowScale.toFixed(3) + ')';
+
+              window.requestAnimationFrame(animateDepthCursor);
+            }
+
+            window.requestAnimationFrame(animateDepthCursor);
+          }
+        }
 
         const contactWidgetForm = document.getElementById('contactWidgetForm');
         const contactWidgetStatus = document.getElementById('contactWidgetStatus');
