@@ -6,6 +6,7 @@
     <title>Rahul Babu</title>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="secrets.local.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link rel="icon" href="data:image/svg+xml, <svg xmlns='http://www.w3.org/2000/svg' viewBox='220 0 16 16%22'><text y='2214'22 font-size=`2216`22>😊</text></svg>">
 
@@ -165,6 +166,47 @@
             margin: 0 0 0.6rem;
             font-size: clamp(2rem, 4vw, 3.85rem);
             letter-spacing: 0.02em;
+        }
+
+        .header-nav-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.55rem 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .header-nav-row nav {
+            flex: 1 1 760px;
+        }
+
+        .resume-download-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 184, 107, 0.84);
+            background: rgba(255, 184, 107, 0.14);
+            color: #ffd7ae;
+            text-decoration: none;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.76rem;
+            letter-spacing: 0.02em;
+            padding: 0.42rem 0.78rem;
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .header-nav-row .resume-download-btn {
+            margin-left: auto;
+            white-space: nowrap;
+        }
+
+        .resume-download-btn:hover,
+        .resume-download-btn:focus-visible {
+            background: rgba(255, 184, 107, 0.28);
+            border-color: rgba(255, 184, 107, 0.98);
+            transform: translateY(-1px);
+            outline: none;
         }
 
         nav ul {
@@ -729,6 +771,15 @@
                 padding: 0.36rem 0.62rem;
             }
 
+            .header-nav-row .resume-download-btn {
+                margin-left: 0;
+            }
+
+            .resume-download-btn {
+                font-size: 0.7rem;
+                padding: 0.34rem 0.64rem;
+            }
+
             .stats-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -800,18 +851,21 @@
     <header>
         <div class="header-inner">
             <h1>Rahul Babu</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#education">Education</a></li>
-                    <li><a href="#experience">Experience</a></li>
-                    <li><a href="#publication">Publication</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#certification">Certification</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+            <div class="header-nav-row">
+                <nav>
+                    <ul>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#education">Education</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#publication">Publication</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#certification">Certification</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <a class="resume-download-btn" href="assets/Resume.pdf" download>Download Resume</a>
+            </div>
         </div>
     </header>
 
@@ -1492,9 +1546,10 @@
         <section id="contact" class="panel reveal">
             <div class="panel-header">
                 <h2>Contact</h2>
-                <p class="panel-kicker">Open to Roles and Collaboration</p>
+                <p class="panel-kicker">Let us build something useful.</p>
             </div>
             <div class="panel-content contact-list">
+                <p>Open to Roles and Collaboration</p>
                 <p><i class="fas fa-envelope"></i> <a href="mailto:rahulb1407@gmail.com">rahulbabu1407@gmail.com</a></p>
                 <p><i class="fas fa-phone"></i> <a href="tel:+16025171962">+1 (602) 517-1962</a></p>
                 <p><i class="fas fa-globe"></i> <a href="https://www.linkedin.com/in/rahulb1407/">linkedin.com/in/rahulb1407/</a></p>
@@ -1642,11 +1697,15 @@
         const contactWidgetForm = document.getElementById('contactWidgetForm');
         const contactWidgetStatus = document.getElementById('contactWidgetStatus');
         const contactWidgetSubmit = document.getElementById('contactWidgetSubmit');
-        // Configure these from EmailJS (use an SMTP-backed service in your EmailJS dashboard).
-        const emailJsConfig = {
-          publicKey: 'ehaEZklqfMNVr8mzv',
-          serviceId: 'service_uzawzs3',
-          templateId: 'template_6etiqxg'
+        // Configure EmailJS keys in secrets.local.js (gitignored).
+        const emailJsConfig = (window.PORTFOLIO_SECRETS && window.PORTFOLIO_SECRETS.emailJs) ? {
+          publicKey: String(window.PORTFOLIO_SECRETS.emailJs.publicKey || '').trim(),
+          serviceId: String(window.PORTFOLIO_SECRETS.emailJs.serviceId || '').trim(),
+          templateId: String(window.PORTFOLIO_SECRETS.emailJs.templateId || '').trim()
+        } : {
+          publicKey: '',
+          serviceId: '',
+          templateId: ''
         };
         const emailJsConfigured = Object.values(emailJsConfig).every((value) => {
           return typeof value === 'string' && value.length > 0 && !value.startsWith('YOUR_');
@@ -1674,7 +1733,7 @@
             const message = String(formData.get('message') || '').trim();
 
             if (!window.emailjs || !emailJsConfigured) {
-              contactWidgetStatus.textContent = 'Email service is not configured yet. Update EmailJS keys in index.html.';
+              contactWidgetStatus.textContent = 'Email service is not configured yet. Update EmailJS keys in secrets.local.js.';
               contactWidgetSubmit.disabled = false;
               return;
             }
@@ -1683,6 +1742,8 @@
               await window.emailjs.send(emailJsConfig.serviceId, emailJsConfig.templateId, {
                 from_name: name,
                 from_email: email,
+                name: name,
+                email: email,
                 reply_to: email,
                 subject: subject,
                 message: message,
