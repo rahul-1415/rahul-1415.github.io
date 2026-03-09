@@ -63,6 +63,342 @@
             color: inherit;
         }
 
+        .scene-background {
+            position: fixed;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .night-scene,
+        .day-scene {
+            position: absolute;
+            inset: 0;
+            transition: opacity 360ms ease;
+        }
+
+        html[data-scene="night"] .night-scene {
+            opacity: 1;
+        }
+
+        html[data-scene="night"] .day-scene {
+            opacity: 0;
+        }
+
+        html[data-scene="day"] .night-scene {
+            opacity: 0;
+        }
+
+        html[data-scene="day"] .day-scene {
+            opacity: 1;
+        }
+
+        .night-scene {
+            --pointer-x: 0;
+            --pointer-y: 0;
+            background:
+                radial-gradient(900px 460px at 50% -10%, rgba(146, 167, 255, 0.12), transparent 65%),
+                linear-gradient(180deg, #020206 0%, #000000 100%);
+            opacity: 0.86;
+        }
+
+        .night-scene .starfield {
+            position: absolute;
+            inset: -25%;
+            display: block;
+            background-repeat: repeat;
+            will-change: transform, opacity;
+        }
+
+        .night-scene .starfield-far {
+            background-image:
+                radial-gradient(1px 1px at 22px 44px, rgba(255, 255, 255, 0.46) 80%, transparent 100%),
+                radial-gradient(1px 1px at 148px 66px, rgba(255, 255, 255, 0.35) 80%, transparent 100%),
+                radial-gradient(1px 1px at 94px 162px, rgba(255, 255, 255, 0.28) 80%, transparent 100%),
+                radial-gradient(1px 1px at 212px 126px, rgba(255, 255, 255, 0.36) 80%, transparent 100%),
+                radial-gradient(1px 1px at 248px 188px, rgba(255, 255, 255, 0.24) 80%, transparent 100%);
+            background-size: 280px 220px;
+            opacity: 0.42;
+            transform: translate3d(calc(var(--pointer-x) * -8px), calc(var(--pointer-y) * -8px), 0);
+            animation: stars-drift-far 130s linear infinite, stars-twinkle-far 6.5s ease-in-out infinite alternate;
+        }
+
+        .night-scene .starfield-mid {
+            background-image:
+                radial-gradient(1.35px 1.35px at 18px 36px, rgba(255, 255, 255, 0.72) 80%, transparent 100%),
+                radial-gradient(1.35px 1.35px at 168px 54px, rgba(255, 255, 255, 0.62) 80%, transparent 100%),
+                radial-gradient(1.35px 1.35px at 106px 114px, rgba(255, 255, 255, 0.52) 80%, transparent 100%),
+                radial-gradient(1.35px 1.35px at 252px 84px, rgba(255, 255, 255, 0.66) 80%, transparent 100%),
+                radial-gradient(1.35px 1.35px at 212px 186px, rgba(255, 255, 255, 0.54) 80%, transparent 100%),
+                radial-gradient(1.35px 1.35px at 54px 198px, rgba(255, 255, 255, 0.48) 80%, transparent 100%);
+            background-size: 300px 240px;
+            opacity: 0.58;
+            transform: translate3d(calc(var(--pointer-x) * -16px), calc(var(--pointer-y) * -16px), 0);
+            animation: stars-drift-mid 95s linear infinite, stars-twinkle-mid 5.4s ease-in-out infinite alternate-reverse;
+        }
+
+        .night-scene .starfield-near {
+            background-image:
+                radial-gradient(1.8px 1.8px at 24px 40px, rgba(255, 255, 255, 0.95) 75%, transparent 100%),
+                radial-gradient(1.8px 1.8px at 92px 112px, rgba(255, 255, 255, 0.88) 75%, transparent 100%),
+                radial-gradient(1.8px 1.8px at 188px 68px, rgba(255, 255, 255, 0.84) 75%, transparent 100%),
+                radial-gradient(1.8px 1.8px at 238px 148px, rgba(255, 255, 255, 0.9) 75%, transparent 100%),
+                radial-gradient(1.8px 1.8px at 146px 210px, rgba(255, 255, 255, 0.8) 75%, transparent 100%),
+                radial-gradient(1.8px 1.8px at 36px 192px, rgba(255, 255, 255, 0.85) 75%, transparent 100%);
+            background-size: 260px 240px;
+            opacity: 0.72;
+            transform: translate3d(calc(var(--pointer-x) * -24px), calc(var(--pointer-y) * -24px), 0);
+            animation: stars-drift-near 72s linear infinite, stars-twinkle-near 4.2s ease-in-out infinite alternate;
+        }
+
+        .night-scene .shooting-stars-layer {
+            position: absolute;
+            inset: -20%;
+            display: block;
+        }
+
+        .night-scene .shooting-star {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 140px;
+            height: 2px;
+            border-radius: 999px;
+            opacity: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(220, 233, 255, 0.55) 42%,
+                rgba(255, 255, 255, 0.98) 100%
+            );
+            box-shadow: 0 0 18px rgba(180, 218, 255, 0.34);
+            transform: translate3d(var(--sx), var(--sy), 0) rotate(var(--angle));
+            animation: shooting-star-flight var(--dur) linear infinite;
+            animation-delay: var(--delay);
+        }
+
+        .night-scene .shooting-star::after {
+            content: "";
+            position: absolute;
+            right: -3px;
+            top: -2px;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #ffffff;
+            box-shadow: 0 0 14px rgba(191, 225, 255, 0.7);
+        }
+
+        .shooting-star-1 {
+            --sx: -18vw;
+            --sy: 8vh;
+            --tx: 144vw;
+            --ty: 72vh;
+            --angle: 20deg;
+            --dur: 8.2s;
+            --delay: 0.4s;
+        }
+
+        .shooting-star-2 {
+            --sx: 114vw;
+            --sy: 6vh;
+            --tx: -140vw;
+            --ty: 78vh;
+            --angle: 158deg;
+            --dur: 9.4s;
+            --delay: 1.8s;
+        }
+
+        .shooting-star-3 {
+            --sx: -20vw;
+            --sy: 86vh;
+            --tx: 130vw;
+            --ty: -64vh;
+            --angle: -26deg;
+            --dur: 10.2s;
+            --delay: 2.6s;
+        }
+
+        .shooting-star-4 {
+            --sx: 118vw;
+            --sy: 74vh;
+            --tx: -150vw;
+            --ty: -70vh;
+            --angle: 204deg;
+            --dur: 11.1s;
+            --delay: 3.3s;
+        }
+
+        .shooting-star-5 {
+            --sx: 8vw;
+            --sy: -14vh;
+            --tx: 108vw;
+            --ty: 112vh;
+            --angle: 42deg;
+            --dur: 9.7s;
+            --delay: 4.1s;
+        }
+
+        .shooting-star-6 {
+            --sx: 92vw;
+            --sy: -18vh;
+            --tx: -104vw;
+            --ty: 120vh;
+            --angle: 136deg;
+            --dur: 10.9s;
+            --delay: 5.3s;
+        }
+
+        .shooting-star-7 {
+            --sx: -14vw;
+            --sy: 42vh;
+            --tx: 146vw;
+            --ty: 32vh;
+            --angle: 11deg;
+            --dur: 12.4s;
+            --delay: 6.2s;
+        }
+
+        .shooting-star-8 {
+            --sx: 116vw;
+            --sy: 54vh;
+            --tx: -142vw;
+            --ty: 26vh;
+            --angle: 169deg;
+            --dur: 13.1s;
+            --delay: 7.4s;
+        }
+
+        .day-scene {
+            opacity: 0;
+            --day-pointer-x: 0;
+            --day-pointer-y: 0;
+            background:
+                radial-gradient(1100px 540px at 50% -14%, rgba(255, 249, 200, 0.95), rgba(255, 249, 200, 0) 60%),
+                radial-gradient(760px 320px at 78% 22%, rgba(255, 246, 204, 0.38), rgba(255, 246, 204, 0) 72%),
+                linear-gradient(180deg, #87c7fb 0%, #9fd7ff 32%, #c9e8ff 62%, #f7eec9 100%);
+            overflow: hidden;
+        }
+
+        .day-scene::before {
+            content: "";
+            position: absolute;
+            inset: -12% -18% auto;
+            height: 62%;
+            background:
+                radial-gradient(680px 360px at 64% 4%, rgba(255, 246, 205, 0.6), rgba(255, 246, 205, 0) 72%),
+                radial-gradient(520px 280px at 18% 0%, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0) 76%);
+            filter: blur(4px);
+            transform: translate3d(calc(var(--day-pointer-x) * -14px), calc(var(--day-pointer-y) * -10px), 0);
+        }
+
+        .day-scene::after {
+            content: "";
+            position: absolute;
+            inset: 52% 0 0;
+            background: linear-gradient(180deg, rgba(255, 244, 210, 0), rgba(255, 226, 150, 0.3) 72%, rgba(255, 212, 120, 0.42));
+        }
+
+        .day-sun {
+            position: absolute;
+            width: 210px;
+            height: 210px;
+            right: 8%;
+            top: 7%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 34% 34%, rgba(255, 255, 244, 0.96) 0%, rgba(255, 237, 150, 0.9) 38%, rgba(255, 208, 90, 0.24) 72%, rgba(255, 208, 90, 0) 100%);
+            box-shadow:
+                0 0 0 28px rgba(255, 238, 170, 0.16),
+                0 0 120px rgba(255, 224, 138, 0.48),
+                0 0 200px rgba(255, 212, 118, 0.22);
+            transform: translate3d(calc(var(--day-pointer-x) * -12px), calc(var(--day-pointer-y) * -8px), 0);
+            animation: sun-breathe 7.4s ease-in-out infinite alternate;
+        }
+
+        .day-cloud {
+            position: absolute;
+            width: 420px;
+            height: 146px;
+            border-radius: 999px;
+            background:
+                radial-gradient(ellipse at 30% 48%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.42) 54%, rgba(255, 255, 255, 0) 100%),
+                radial-gradient(ellipse at 66% 42%, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.28) 58%, rgba(255, 255, 255, 0) 100%);
+            box-shadow: 0 30px 72px rgba(109, 160, 206, 0.22);
+            --cloud-scale: 1;
+            --cloud-start: -22vw;
+            --cloud-opacity: 0.8;
+            opacity: var(--cloud-opacity);
+            filter: blur(3.6px);
+            animation: cloud-drift var(--dur, 44s) linear infinite;
+            transform: translateX(var(--cloud-start)) scale(var(--cloud-scale));
+        }
+
+        .day-cloud::before,
+        .day-cloud::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0) 72%);
+        }
+
+        .day-cloud::before {
+            width: 220px;
+            height: 108px;
+            left: 30px;
+            top: -36px;
+        }
+
+        .day-cloud::after {
+            width: 248px;
+            height: 120px;
+            right: 26px;
+            top: -42px;
+        }
+
+        .day-cloud-1 {
+            top: 12%;
+            --dur: 66s;
+            animation-delay: -8s;
+            --cloud-opacity: 0.62;
+        }
+
+        .day-cloud-2 {
+            top: 26%;
+            --dur: 58s;
+            --cloud-start: -42vw;
+            --cloud-scale: 0.88;
+            --cloud-opacity: 0.78;
+            animation-delay: -30s;
+        }
+
+        .day-cloud-3 {
+            top: 39%;
+            --dur: 52s;
+            --cloud-start: -30vw;
+            --cloud-scale: 0.76;
+            --cloud-opacity: 0.74;
+            animation-delay: -18s;
+        }
+
+        .day-cloud-4 {
+            top: 8%;
+            --dur: 78s;
+            --cloud-start: -36vw;
+            --cloud-scale: 0.62;
+            --cloud-opacity: 0.48;
+            animation-delay: -36s;
+        }
+
+        .day-cloud-5 {
+            top: 56%;
+            --dur: 60s;
+            --cloud-start: -34vw;
+            --cloud-scale: 0.95;
+            --cloud-opacity: 0.72;
+            animation-delay: -44s;
+        }
+
         html.custom-cursor-enabled body {
             cursor: none;
         }
@@ -160,6 +496,7 @@
             width: min(1120px, 92vw);
             margin: 0 auto;
             padding: 1rem 0 0.85rem;
+            position: relative;
         }
 
         header h1 {
@@ -180,7 +517,59 @@
             flex: 1 1 760px;
         }
 
-        .resume-download-btn {
+        .theme-switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-left: 0;
+            border-radius: 999px;
+            padding: 0.28rem 0.48rem;
+            background: rgba(0, 0, 0, 0.26);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            position: absolute;
+            top: 1rem;
+            right: 0;
+            z-index: 45;
+        }
+
+        .theme-switch-label {
+            font-size: 0.68rem;
+            font-family: "JetBrains Mono", monospace;
+            color: #e5ecff;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .scene-slider {
+            width: 50px;
+            height: 27px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            background: rgba(0, 0, 0, 0.35);
+            padding: 2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+            transition: background-color 0.25s ease, border-color 0.25s ease;
+        }
+
+        .scene-slider.active {
+            justify-content: flex-end;
+            border-color: rgba(255, 212, 76, 0.82);
+            background: rgba(255, 206, 90, 0.24);
+        }
+
+        .scene-slider-thumb {
+            width: 21px;
+            height: 21px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #f8fbff, #d2dbf4);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+        }
+
+        .resume-download-btn,
+        .resume-view-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -201,8 +590,15 @@
             white-space: nowrap;
         }
 
+        .header-nav-row .resume-view-btn {
+            margin-left: 0.4rem;
+            white-space: nowrap;
+        }
+
         .resume-download-btn:hover,
-        .resume-download-btn:focus-visible {
+        .resume-download-btn:focus-visible,
+        .resume-view-btn:hover,
+        .resume-view-btn:focus-visible {
             background: rgba(255, 184, 107, 0.28);
             border-color: rgba(255, 184, 107, 0.98);
             transform: translateY(-1px);
@@ -733,6 +1129,110 @@
             font-family: "JetBrains Mono", monospace;
         }
 
+        .console-shell,
+        footer {
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes stars-drift-far {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -280px 220px;
+            }
+        }
+
+        @keyframes stars-drift-mid {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -300px 240px;
+            }
+        }
+
+        @keyframes stars-drift-near {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -260px 240px;
+            }
+        }
+
+        @keyframes stars-twinkle-far {
+            0% {
+                opacity: 0.28;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes stars-twinkle-mid {
+            0% {
+                opacity: 0.42;
+            }
+
+            100% {
+                opacity: 0.72;
+            }
+        }
+
+        @keyframes stars-twinkle-near {
+            0% {
+                opacity: 0.58;
+            }
+
+            100% {
+                opacity: 0.88;
+            }
+        }
+
+        @keyframes shooting-star-flight {
+            0%,
+            86% {
+                opacity: 0;
+                transform: translate3d(var(--sx), var(--sy), 0) rotate(var(--angle)) scaleX(0.55);
+            }
+
+            88% {
+                opacity: 0.95;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate3d(calc(var(--sx) + var(--tx)), calc(var(--sy) + var(--ty)), 0) rotate(var(--angle))
+                    scaleX(1);
+            }
+        }
+
+        @keyframes cloud-drift {
+            from {
+                transform: translateX(var(--cloud-start)) scale(var(--cloud-scale));
+            }
+
+            to {
+                transform: translateX(124vw) scale(var(--cloud-scale));
+            }
+        }
+
+        @keyframes sun-breathe {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.05);
+            }
+        }
+
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -775,7 +1275,20 @@
                 margin-left: 0;
             }
 
-            .resume-download-btn {
+            .header-nav-row .resume-view-btn {
+                margin-left: 0;
+            }
+
+            .theme-switch {
+                margin-left: 0;
+                position: static;
+                top: auto;
+                right: auto;
+                z-index: auto;
+            }
+
+            .resume-download-btn,
+            .resume-view-btn {
                 font-size: 0.7rem;
                 padding: 0.34rem 0.64rem;
             }
@@ -844,10 +1357,43 @@
             .depth-cursor {
                 display: none !important;
             }
+
+            .night-scene .starfield,
+            .night-scene .shooting-star,
+            .day-cloud,
+            .day-sun {
+                animation: none !important;
+                transform: none !important;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="scene-background" aria-hidden="true">
+        <div class="night-scene">
+            <span class="starfield starfield-far"></span>
+            <span class="starfield starfield-mid"></span>
+            <span class="starfield starfield-near"></span>
+            <div class="shooting-stars-layer">
+                <span class="shooting-star shooting-star-1"></span>
+                <span class="shooting-star shooting-star-2"></span>
+                <span class="shooting-star shooting-star-3"></span>
+                <span class="shooting-star shooting-star-4"></span>
+                <span class="shooting-star shooting-star-5"></span>
+                <span class="shooting-star shooting-star-6"></span>
+                <span class="shooting-star shooting-star-7"></span>
+                <span class="shooting-star shooting-star-8"></span>
+            </div>
+        </div>
+        <div class="day-scene">
+            <span class="day-sun"></span>
+            <span class="day-cloud day-cloud-1"></span>
+            <span class="day-cloud day-cloud-2"></span>
+            <span class="day-cloud day-cloud-3"></span>
+            <span class="day-cloud day-cloud-4"></span>
+            <span class="day-cloud day-cloud-5"></span>
+        </div>
+    </div>
     <header>
         <div class="header-inner">
             <h1>Rahul Babu</h1>
@@ -865,6 +1411,14 @@
                     </ul>
                 </nav>
                 <a class="resume-download-btn" href="assets/Resume.pdf" download>Download Resume</a>
+                <a class="resume-view-btn" href="assets/Resume.pdf" target="_blank" rel="noopener noreferrer">View Resume</a>
+                <div class="theme-switch">
+                    <span class="theme-switch-label">Night</span>
+                    <button id="sceneToggle" class="scene-slider" type="button" role="switch" aria-checked="false" aria-label="Toggle day and night theme">
+                        <span class="scene-slider-thumb"></span>
+                    </button>
+                    <span class="theme-switch-label">Day</span>
+                </div>
             </div>
         </div>
     </header>
@@ -1590,6 +2144,89 @@
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const isMobile = window.matchMedia('(max-width: 767px)').matches;
         const canUseDepthCursor = !prefersReducedMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const sceneToggle = document.getElementById('sceneToggle');
+        const nightScene = document.querySelector('.night-scene');
+        const dayScene = document.querySelector('.day-scene');
+        const SCENE_STORAGE_KEY = 'portfolio_scene_mode';
+
+        let sceneMode = 'night';
+        try {
+          const savedScene = window.localStorage.getItem(SCENE_STORAGE_KEY);
+          if (savedScene === 'day' || savedScene === 'night') {
+            sceneMode = savedScene;
+          }
+        } catch (error) {
+          sceneMode = 'night';
+        }
+
+        function applyScene(nextMode) {
+          sceneMode = nextMode === 'day' ? 'day' : 'night';
+          document.documentElement.setAttribute('data-scene', sceneMode);
+
+          if (sceneToggle) {
+            const isDay = sceneMode === 'day';
+            sceneToggle.classList.toggle('active', isDay);
+            sceneToggle.setAttribute('aria-checked', String(isDay));
+          }
+        }
+
+        applyScene(sceneMode);
+
+        if (sceneToggle) {
+          sceneToggle.addEventListener('click', function () {
+            const next = sceneMode === 'night' ? 'day' : 'night';
+            applyScene(next);
+            try {
+              window.localStorage.setItem(SCENE_STORAGE_KEY, next);
+            } catch (error) {
+              // Ignore storage errors in restricted contexts.
+            }
+          });
+        }
+
+        if (!prefersReducedMotion && nightScene) {
+          let frameId = 0;
+          let targetX = 0;
+          let targetY = 0;
+          let currentX = 0;
+          let currentY = 0;
+
+          function updatePointerOffset() {
+            currentX += (targetX - currentX) * 0.08;
+            currentY += (targetY - currentY) * 0.08;
+            nightScene.style.setProperty('--pointer-x', currentX.toFixed(3));
+            nightScene.style.setProperty('--pointer-y', currentY.toFixed(3));
+            if (dayScene) {
+              dayScene.style.setProperty('--day-pointer-x', currentX.toFixed(3));
+              dayScene.style.setProperty('--day-pointer-y', currentY.toFixed(3));
+            }
+
+            if (Math.abs(targetX - currentX) > 0.001 || Math.abs(targetY - currentY) > 0.001) {
+              frameId = window.requestAnimationFrame(updatePointerOffset);
+              return;
+            }
+
+            frameId = 0;
+          }
+
+          function queueUpdate() {
+            if (!frameId) {
+              frameId = window.requestAnimationFrame(updatePointerOffset);
+            }
+          }
+
+          window.addEventListener('pointermove', function (event) {
+            targetX = (event.clientX / window.innerWidth - 0.5) * 2;
+            targetY = (event.clientY / window.innerHeight - 0.5) * 2;
+            queueUpdate();
+          }, { passive: true });
+
+          window.addEventListener('pointerleave', function () {
+            targetX = 0;
+            targetY = 0;
+            queueUpdate();
+          });
+        }
 
         const backToTopButton = document.getElementById('backToTopBtn');
 
