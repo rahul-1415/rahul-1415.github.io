@@ -515,6 +515,14 @@
 
         .header-nav-row nav {
             flex: 1 1 760px;
+            min-width: 0;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .header-nav-row nav::-webkit-scrollbar {
+            display: none;
         }
 
         .theme-switch {
@@ -610,19 +618,20 @@
             margin: 0;
             padding: 0;
             display: flex;
-            flex-wrap: wrap;
-            gap: 0.45rem;
+            flex-wrap: nowrap;
+            gap: 0.32rem;
+            white-space: nowrap;
         }
 
         nav ul li a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.42rem 0.72rem;
+            padding: 0.38rem 0.58rem;
             border-radius: 999px;
             border: 1px solid rgba(255, 255, 255, 0.16);
             background: rgba(255, 255, 255, 0.02);
-            font-size: 0.85rem;
+            font-size: 0.76rem;
             font-family: "JetBrains Mono", monospace;
             color: var(--text);
             text-decoration: none;
@@ -649,9 +658,10 @@
         #experience { order: 3; }
         #publication { order: 4; }
         #projects { order: 5; }
-        #certification { order: 6; }
-        #skills { order: 7; }
-        #contact { order: 8; }
+        #blogs { order: 6; }
+        #certification { order: 7; }
+        #skills { order: 8; }
+        #contact { order: 9; }
 
         section {
             scroll-margin-top: 120px;
@@ -935,6 +945,49 @@
             margin: 0 0 0.45rem;
             color: #d5dced;
             line-height: 1.5;
+        }
+
+        .timeline-stack {
+            position: relative;
+            display: grid;
+            gap: 1.1rem;
+            padding-left: 2.15rem;
+        }
+
+        .timeline-stack::before {
+            content: "";
+            position: absolute;
+            left: 0.55rem;
+            top: 0.65rem;
+            bottom: 0.65rem;
+            width: 3px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, rgba(255, 184, 107, 0.82), rgba(120, 158, 255, 0.52));
+            box-shadow: 0 0 24px rgba(255, 184, 107, 0.16);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-left: 0;
+        }
+
+        .timeline-item::before {
+            content: none;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            content: none;
+        }
+
+        .timeline-item::after {
+            content: "";
+            position: absolute;
+            left: -1.05rem;
+            top: 1.48rem;
+            width: 1.05rem;
+            height: 2px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(255, 184, 107, 0.72), rgba(255, 184, 107, 0.14));
         }
 
         .skills-grid {
@@ -1267,8 +1320,8 @@
             }
 
             nav ul li a {
-                font-size: 0.72rem;
-                padding: 0.36rem 0.62rem;
+                font-size: 0.68rem;
+                padding: 0.34rem 0.5rem;
             }
 
             .header-nav-row .resume-download-btn {
@@ -1295,6 +1348,19 @@
 
             .stats-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .timeline-stack {
+                padding-left: 1.7rem;
+            }
+
+            .timeline-stack::before {
+                left: 0.32rem;
+            }
+
+            .timeline-item::after {
+                left: -0.72rem;
+                width: 0.72rem;
             }
 
             .filter-bar {
@@ -1405,6 +1471,7 @@
                         <li><a href="#experience">Experience</a></li>
                         <li><a href="#publication">Publication</a></li>
                         <li><a href="#projects">Projects</a></li>
+                        <li><a href="#blogs">Blogs</a></li>
                         <li><a href="#certification">Certification</a></li>
                         <li><a href="#skills">Skills</a></li>
                         <li><a href="#contact">Contact</a></li>
@@ -1810,12 +1877,47 @@
             </div>
         </section>
 
+        <section id="blogs" class="panel reveal">
+            <div class="panel-header">
+                <h2>Blogs</h2>
+            </div>
+            <div class="panel-content">
+                <div class="project-list">
+                    <article class="project-box reveal">
+                        <div class="experience-header">
+                            <h3>Opioid Risk Geo Dashboard</h3>
+                            <p class="project-meta">React, TypeScript, FastAPI</p>
+                        </div>
+                        <p>Wrote about building an Arizona overdose-risk visualizer at Census Block Group resolution, covering the geospatial UI, API integration, and product decisions behind the dashboard.</p>
+                        <p>
+                            <a href="https://opioid-overdose-forecasting.netlify.app/" class="link-button">Live Demo</a>
+                            <a href="https://rahul-b.medium.com/building-an-opioid-overdose-risk-visualizer-for-arizona-at-census-block-group-resolution-a1519a7f3a75" class="link-button">Medium</a>
+                            <a href="https://github.com/rahul-1415/Opioid-Overdose-Forecasting" class="link-button">Code</a>
+                        </p>
+                    </article>
+
+                    <article class="project-box reveal">
+                        <div class="experience-header">
+                            <h3>Climate Policy RAG App</h3>
+                            <p class="project-meta">Streamlit, LangChain, ChromaDB</p>
+                        </div>
+                        <p>Documented how the climate-policy assistant was built using retrieval, reranking, post-processing, and analytics to improve answer quality and make the app more useful for policy research workflows.</p>
+                        <p>
+                            <a href="https://cap-rag.streamlit.app/" class="link-button">Live Demo</a>
+                            <a href="https://medium.com/@rahul-b/building-a-climate-policy-rag-assistant-with-reranking-post-processing-and-analytics-3a28d4749884" class="link-button">Medium</a>
+                            <a href="https://github.com/rahul-1415/CAP-RAG" class="link-button">Code</a>
+                        </p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
         <section id="experience" class="panel reveal">
             <div class="panel-header">
                 <h2>Work Experience</h2>
             </div>
-            <div class="panel-content">
-                <div class="experience-box">
+            <div class="panel-content timeline-stack">
+                <div class="experience-box timeline-item">
                     <div class="experience-header">
                         <h3>Hovian Inc.</h3>
                         <p>Cucamanga, California, USA</p>
@@ -1836,7 +1938,7 @@
                     </ul>
                 </div>
 
-                <div class="experience-box">
+                <div class="experience-box timeline-item">
                     <div class="experience-header">
                         <h3>ASU Decision Theater</h3>
                         <p>Tempe, Arizona, USA</p>
@@ -1856,7 +1958,7 @@
                     </ul>
                 </div>
 
-                <div class="experience-box">
+                <div class="experience-box timeline-item">
                     <div class="experience-header">
                         <h3>InnoHat Systems</h3>
                         <p>Chennai, TN, India</p>
@@ -2070,8 +2172,8 @@
             <div class="panel-header">
                 <h2>Education</h2>
             </div>
-            <div class="panel-content">
-                <div class="experience-box">
+            <div class="panel-content timeline-stack">
+                <div class="experience-box timeline-item">
                     <div class="experience-header">
                         <h3>Arizona State University</h3>
                         <p>Tempe, AZ, USA</p>
@@ -2083,7 +2185,7 @@
                     <p>CGPA: 3.83/4</p>
                 </div>
 
-                <div class="experience-box">
+                <div class="experience-box timeline-item">
                     <div class="experience-header">
                         <h3>Madras Institute of Technology, Anna University</h3>
                         <p>Chennai, TN, India</p>
