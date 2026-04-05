@@ -657,96 +657,175 @@
 
         .project-box.project-collapsible {
             position: relative;
-            padding-right: 4.8rem;
+            padding: 0;
             overflow: hidden;
             isolation: isolate;
+            border: 1px solid #e7eaf0;
+            border-radius: 20px;
+            background: #ffffff;
+            box-shadow: 0 18px 42px -30px rgba(17, 24, 39, 0.28);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
         }
 
-        .project-box.project-collapsible::before {
-            content: "";
-            position: absolute;
-            inset: 0;
+        .project-box.project-collapsible:hover,
+        .project-box.project-collapsible:focus-within {
+            transform: translateY(-6px);
+            border-color: #d9e3ef;
+            box-shadow: 0 26px 58px -34px rgba(17, 24, 39, 0.32);
+        }
+
+        .project-media {
+            position: relative;
+            min-height: 172px;
+            padding: 1rem 1rem 1.1rem;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
             background-image:
-                linear-gradient(rgba(242, 243, 247, 0.26), rgba(242, 243, 247, 0.9)),
+                linear-gradient(rgba(15, 23, 42, 0.24), rgba(15, 23, 42, 0.56)),
                 var(--project-bg-image);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0;
-            transition: opacity 0.24s ease;
-            z-index: 0;
         }
 
-        .project-box.project-collapsible.has-project-bg::before {
-            opacity: 1;
+        .project-box.project-collapsible:not(.has-project-bg) .project-media {
+            background-image: linear-gradient(135deg, #ced8e7 0%, #f2f5f9 100%);
         }
 
-        .project-box.project-collapsible.is-open::before {
-            opacity: 0;
+        .project-media::after {
+            content: "";
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 56px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.96) 100%);
         }
 
-        .project-box.project-collapsible.has-project-bg:not(.is-open) .experience-header h3,
-        .project-box.project-collapsible.has-project-bg:not(.is-open) > h3 {
-            color: #111111;
-            font-weight: 700;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
-        }
-
-        .project-box.project-collapsible.has-project-bg:not(.is-open) .project-meta,
-        .project-box.project-collapsible.has-project-bg:not(.is-open) .experience-header p {
-            color: #2b2b2b;
-            font-weight: 700;
-            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
-        }
-
-        .project-box.project-collapsible.has-project-bg:not(.is-open) .link-button {
-            border-color: rgba(17, 17, 17, 0.12);
-            color: #333333;
-            font-weight: 700;
-            background: rgba(255, 255, 255, 0.92);
-            box-shadow: 0 8px 20px -16px rgba(0, 0, 0, 0.38);
-        }
-
-        .project-box.project-collapsible > *:not(.project-toggle) {
+        .project-badge-row {
             position: relative;
             z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            max-width: calc(100% - 4.25rem);
+        }
+
+        .project-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.34rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #223047;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            box-shadow: 0 12px 24px -22px rgba(15, 23, 42, 0.65);
+        }
+
+        .project-card-body {
+            padding: 1.3rem 1.5rem 1.45rem;
+            background: #ffffff;
         }
 
         .project-toggle {
-            position: absolute;
-            top: 1.35rem;
-            right: 1.35rem;
-            width: 2.15rem;
-            height: 2.15rem;
-            border: 1px solid var(--line);
-            background: #ffffff;
-            color: #676767;
+            position: relative;
+            z-index: 1;
+            flex: 0 0 auto;
+            width: 2.5rem;
+            height: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.88);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.92);
+            color: #223047;
             font-family: "Quicksand", Arial, sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.3rem;
             font-weight: 700;
             line-height: 1;
             cursor: pointer;
-            transition: border-color 0.2s ease, color 0.2s ease;
+            box-shadow: 0 18px 30px -22px rgba(15, 23, 42, 0.7);
+            transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
         }
 
         .project-toggle:hover,
         .project-toggle:focus-visible,
         .project-box.is-open .project-toggle {
-            border-color: var(--accent);
-            color: var(--accent);
+            transform: scale(1.05);
+            border-color: #ffffff;
+            color: #0f172a;
+            background: #ffffff;
             outline: none;
         }
 
+        .project-box.project-collapsible .experience-header {
+            display: grid;
+            gap: 0.45rem;
+            justify-content: stretch;
+        }
+
+        .project-box.project-collapsible .experience-header h3 {
+            color: #111827;
+            font-size: 1.34rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .project-box.project-collapsible .project-meta,
+        .project-box.project-collapsible .experience-header p {
+            margin: 0;
+            color: #4b5563;
+            font-size: 0.95rem;
+            font-weight: 600;
+            line-height: 1.55;
+        }
+
+        .project-summary {
+            margin: 0.9rem 0 1rem;
+            color: #374151;
+            font-size: 0.98rem;
+            font-weight: 500;
+            line-height: 1.72;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
         .project-links {
-            margin: 0 0 0.95rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin: 0;
+        }
+
+        .project-box.project-collapsible .project-links .link-button {
+            border-color: #d9dee7;
+            color: #243041;
+            font-weight: 700;
+            background: #ffffff;
+        }
+
+        .project-box.project-collapsible .project-links .link-button:hover,
+        .project-box.project-collapsible .project-links .link-button:focus-visible {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .project-details {
-            margin-top: 0.2rem;
+            margin-top: 1.1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e8edf3;
         }
 
         .project-details[hidden] {
             display: none !important;
+        }
+
+        .project-box.is-open .project-summary {
+            -webkit-line-clamp: initial;
         }
 
         .experience-header,
@@ -790,6 +869,112 @@
             color: #666666;
             font-size: 1.02rem;
             line-height: 1.75;
+        }
+
+        .publication-grid,
+        .certification-grid {
+            display: grid;
+            gap: 1.35rem;
+        }
+
+        .publication-card,
+        .certification-card {
+            padding: 1.45rem 1.5rem 1.5rem;
+            border: 1px solid #e5ebf2;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 18px 40px -32px rgba(15, 23, 42, 0.25);
+        }
+
+        .publication-card {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .certification-card {
+            display: grid;
+            gap: 0.9rem;
+            align-content: start;
+        }
+
+        .entry-kicker {
+            margin: 0;
+            color: #8b95a7;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .entry-header {
+            display: grid;
+            gap: 0.6rem;
+        }
+
+        .entry-meta-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.55rem 1rem;
+        }
+
+        .publication-card h3,
+        .certification-card h3 {
+            margin: 0;
+            color: #111827;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 1.18rem;
+            font-weight: 700;
+            line-height: 1.38;
+        }
+
+        .entry-date,
+        .entry-issuer {
+            margin: 0;
+            color: #596579;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+
+        .publication-card .entry-subtitle,
+        .certification-card .entry-subtitle {
+            margin: 0;
+            color: #2c3a4f;
+            font-size: 0.96rem;
+            font-weight: 600;
+            line-height: 1.65;
+        }
+
+        .publication-card .entry-copy,
+        .certification-card .entry-copy {
+            margin: 0;
+            color: #616c7f;
+            font-size: 0.97rem;
+            line-height: 1.72;
+        }
+
+        .credential-list {
+            display: grid;
+            gap: 0.5rem;
+            margin: 0;
+        }
+
+        .credential-line {
+            margin: 0;
+            color: #616c7f;
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        .credential-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.2rem;
         }
 
         .timeline-stack {
@@ -970,6 +1155,11 @@
             .project-list {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+
+            .publication-grid,
+            .certification-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 1023px) {
@@ -1013,6 +1203,11 @@
 
             .counter-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .publication-grid,
+            .certification-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1064,6 +1259,24 @@
             .project-box li,
             .experience-box li {
                 font-size: 1rem;
+            }
+
+            .project-media {
+                min-height: 148px;
+                padding: 0.85rem 0.85rem 0.95rem;
+            }
+
+            .project-card-body {
+                padding: 1.1rem 1.1rem 1.2rem;
+            }
+
+            .project-badge {
+                font-size: 0.64rem;
+                letter-spacing: 0.07em;
+            }
+
+            .project-box.project-collapsible .experience-header h3 {
+                font-size: 1.18rem;
             }
 
             .skills-grid {
@@ -1733,25 +1946,31 @@
                 <h2>Publication</h2>
             </div>
             <div class="panel-content">
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>Performance within the Foundation Paradox</h3>
-                        <p>Feb 2026</p>
-                    </div>
-                    <div class="role-header">
-                        <p><strong>The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields</strong></p>
-                        <p>Submitted (In Progress)</p>
-                    </div>
-                    <p>Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss.</p>
-                </div>
+                <div class="publication-grid">
+                    <article class="publication-card">
+                        <p class="entry-kicker">Research Publication</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>Performance within the Foundation Paradox</h3>
+                                <p class="entry-date">Feb 2026</p>
+                            </div>
+                            <p class="entry-subtitle"><strong>The Case for Small, Qualitative Evaluations (SQEs) for Grading LLM Chat Responses for Extreme Heat Adaptation and Other Less-Bonded Fields</strong></p>
+                            <p class="entry-issuer">Submitted (In Progress)</p>
+                        </div>
+                        <p class="entry-copy">Co-authored a research study introducing the Desert Language Model Evaluation Framework (DLEF) to assess LLM performance in extreme heat adaptation and show domain-specific strengths and limitations that large-scale benchmarks can miss.</p>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>An Automatic Path Navigation for Visually Challenged People using Deep Q Learning</h3>
-                        <p>Jan 2023</p>
-                    </div>
-                    <p><strong>Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218</strong></p>
-                    <p>Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance.</p>
+                    <article class="publication-card">
+                        <p class="entry-kicker">Journal Publication</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>An Automatic Path Navigation for Visually Challenged People using Deep Q Learning</h3>
+                                <p class="entry-date">Jan 2023</p>
+                            </div>
+                            <p class="entry-subtitle"><strong>Advances in Computers, Elsevier, Volume 132 (2024), Pages 205-218</strong></p>
+                        </div>
+                        <p class="entry-copy">Published a study on autonomous navigation that uses a Deep Q-Learning model with a reward-penalty mechanism to train an agent in a generated environment for real-world obstacle avoidance.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -1761,109 +1980,181 @@
                 <h2>Certification</h2>
             </div>
             <div class="panel-content">
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>AWS Certified Solutions Architect - Associate</h3>
-                        <p>Amazon Web Services (AWS)</p>
-                    </div>
-                    <p>Issued May 2025 - Expires May 2028</p>
-                    <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">Show Credential</a>
-                </div>
+                <div class="certification-grid">
+                    <article class="certification-card">
+                        <p class="entry-kicker">Professional Certification</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>AWS Certified Solutions Architect - Associate</h3>
+                                <p class="entry-issuer">Amazon Web Services (AWS)</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued May 2025 - Expires May 2028</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://cp.certmetrics.com/amazon/en/public/verify/credential/ab66555f0c4d4fa69015b02bd7e4bdc5" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>AIG - Actuarial Analyst</h3>
-                        <p>Forage</p>
-                    </div>
-                    <p>Issued Sep 2025</p>
-                    <p>Credential ID: 6D2BARv5wgwb9AqEx</p>
-                    <p>Skills: Data Analysis, Visual Analytics</p>
-                    <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/4nAmAbTbHbnGMNSyo/b7MfbG9W4iCNGnd23_4nAmAbTbHbnGMNSyo_68c0c162a8bab8f37499f4fe_1757464209554_completion_certificate.pdf" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Virtual Experience</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>AIG - Actuarial Analyst</h3>
+                                <p class="entry-issuer">Forage</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Sep 2025</p>
+                            <p class="credential-line">Credential ID: 6D2BARv5wgwb9AqEx</p>
+                            <p class="credential-line">Skills: Data Analysis, Visual Analytics</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://forage-uploads-prod.s3.amazonaws.com/completion-certificates/4nAmAbTbHbnGMNSyo/b7MfbG9W4iCNGnd23_4nAmAbTbHbnGMNSyo_68c0c162a8bab8f37499f4fe_1757464209554_completion_certificate.pdf" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>COEBC - Code of Ethical Business Conduct Training</h3>
-                        <p>CITI Program</p>
-                    </div>
-                    <p>Issued Jun 2024</p>
-                    <p>Credential ID: 60593265</p>
-                    <a href="https://www.citiprogram.org/verify/?wcbcd3d78-36dc-436e-9a18-03b7a65d2667-60593265" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Research Compliance</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>COEBC - Code of Ethical Business Conduct Training</h3>
+                                <p class="entry-issuer">CITI Program</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Jun 2024</p>
+                            <p class="credential-line">Credential ID: 60593265</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.citiprogram.org/verify/?wcbcd3d78-36dc-436e-9a18-03b7a65d2667-60593265" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>RCR - Graduate Student and Postdoctoral Researcher Responsible Conduct of Research</h3>
-                        <p>CITI Program</p>
-                    </div>
-                    <p>Issued Jun 2024</p>
-                    <p>Credential ID: 63090511</p>
-                    <a href="https://www.citiprogram.org/verify/?w58a49120-ed91-4173-a64b-7f0f572872e9-63090511" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Research Compliance</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>RCR - Graduate Student and Postdoctoral Researcher Responsible Conduct of Research</h3>
+                                <p class="entry-issuer">CITI Program</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Jun 2024</p>
+                            <p class="credential-line">Credential ID: 63090511</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.citiprogram.org/verify/?w58a49120-ed91-4173-a64b-7f0f572872e9-63090511" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>IRB - Social &amp; Behavioral Research (Group 2)</h3>
-                        <p>CITI Program</p>
-                    </div>
-                    <p>Issued Jan 2024 - Expires Jan 2028</p>
-                    <p>Credential ID: 60593339</p>
-                    <a href="https://www.citiprogram.org/verify/?w71f8c2ca-2167-4717-9208-d58cdf528614-60593339" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Research Compliance</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>IRB - Social &amp; Behavioral Research (Group 2)</h3>
+                                <p class="entry-issuer">CITI Program</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Jan 2024 - Expires Jan 2028</p>
+                            <p class="credential-line">Credential ID: 60593339</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.citiprogram.org/verify/?w71f8c2ca-2167-4717-9208-d58cdf528614-60593339" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>Computer Architecture and Computer Organization Masterclass</h3>
-                        <p>Udemy</p>
-                    </div>
-                    <p>Issued Feb 2024</p>
-                    <p>Credential ID: UC-4a6796d5-5009-4e25-af33-bcd88d61649b</p>
-                    <p>Skills: Computer Architecture</p>
-                    <a href="https://www.udemy.com/certificate/UC-4a6796d5-5009-4e25-af33-bcd88d61649b/" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Course Certificate</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>Computer Architecture and Computer Organization Masterclass</h3>
+                                <p class="entry-issuer">Udemy</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Feb 2024</p>
+                            <p class="credential-line">Credential ID: UC-4a6796d5-5009-4e25-af33-bcd88d61649b</p>
+                            <p class="credential-line">Skills: Computer Architecture</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.udemy.com/certificate/UC-4a6796d5-5009-4e25-af33-bcd88d61649b/" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>Applied Data Science Capstone</h3>
-                        <p>Coursera</p>
-                    </div>
-                    <p>Issued Aug 2023</p>
-                    <p>Credential ID: 4LQXS9ZN4373</p>
-                    <p>Skills: Exploratory Data Analysis, Visual Analytics, Data Science, Data Analysis</p>
-                    <a href="https://www.coursera.org/verify/4LQXS9ZN4373" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Course Certificate</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>Applied Data Science Capstone</h3>
+                                <p class="entry-issuer">Coursera</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Aug 2023</p>
+                            <p class="credential-line">Credential ID: 4LQXS9ZN4373</p>
+                            <p class="credential-line">Skills: Exploratory Data Analysis, Visual Analytics, Data Science, Data Analysis</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.coursera.org/verify/4LQXS9ZN4373" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>Foundations of User Experience (UX) Design</h3>
-                        <p>Coursera</p>
-                    </div>
-                    <p>Issued Aug 2023</p>
-                    <p>Credential ID: LMHXK6GDTHZ9</p>
-                    <p>Skills: User Experience (UX), Wireframing</p>
-                    <a href="https://www.coursera.org/verify/LMHXK6GDTHZ9" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Course Certificate</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>Foundations of User Experience (UX) Design</h3>
+                                <p class="entry-issuer">Coursera</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Aug 2023</p>
+                            <p class="credential-line">Credential ID: LMHXK6GDTHZ9</p>
+                            <p class="credential-line">Skills: User Experience (UX), Wireframing</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.coursera.org/verify/LMHXK6GDTHZ9" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>DevOps Beginners to Advanced with Projects - 2023</h3>
-                        <p>Udemy</p>
-                    </div>
-                    <p>Issued Aug 2023</p>
-                    <p>Credential ID: UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9</p>
-                    <p>Skills: Scripting, Docker, Linux, Kubernetes, Amazon Web Services (AWS)</p>
-                    <a href="https://www.udemy.com/certificate/UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9/" class="link-button">Show Credential</a>
-                </div>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Course Certificate</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>DevOps Beginners to Advanced with Projects - 2023</h3>
+                                <p class="entry-issuer">Udemy</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Aug 2023</p>
+                            <p class="credential-line">Credential ID: UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9</p>
+                            <p class="credential-line">Skills: Scripting, Docker, Linux, Kubernetes, Amazon Web Services (AWS)</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.udemy.com/certificate/UC-09351ca5-91b3-4cda-8beb-b87d7e80a6d9/" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
 
-                <div class="experience-box">
-                    <div class="experience-header">
-                        <h3>Angular - The Complete Guide (2023 Edition)</h3>
-                        <p>Udemy</p>
-                    </div>
-                    <p>Issued Jun 2023</p>
-                    <p>Credential ID: UC-1bc4bd69-2022-4696-a861-135f3688bb57</p>
-                    <p>Skills: AngularJS, Microsoft Visual Studio Code, Angular</p>
-                    <a href="https://www.udemy.com/certificate/UC-1bc4bd69-2022-4696-a861-135f3688bb57/" class="link-button">Show Credential</a>
+                    <article class="certification-card">
+                        <p class="entry-kicker">Course Certificate</p>
+                        <div class="entry-header">
+                            <div class="entry-meta-row">
+                                <h3>Angular - The Complete Guide (2023 Edition)</h3>
+                                <p class="entry-issuer">Udemy</p>
+                            </div>
+                        </div>
+                        <div class="credential-list">
+                            <p class="credential-line">Issued Jun 2023</p>
+                            <p class="credential-line">Credential ID: UC-1bc4bd69-2022-4696-a861-135f3688bb57</p>
+                            <p class="credential-line">Skills: AngularJS, Microsoft Visual Studio Code, Angular</p>
+                        </div>
+                        <div class="credential-actions">
+                            <a href="https://www.udemy.com/certificate/UC-1bc4bd69-2022-4696-a861-135f3688bb57/" class="link-button">Show Credential</a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
@@ -2347,6 +2638,11 @@
         const projectCards = Array.from(document.querySelectorAll('#projectList .project-box'));
         const projectStatus = document.getElementById('projectStatus');
         const projectEmpty = document.getElementById('projectEmpty');
+        const projectTagLabels = {
+          ai: 'AI',
+          fullstack: 'Full-Stack',
+          cloud: 'Cloud'
+        };
         const projectBackgroundsByTitle = {
           'Interactive Portfolio': 'https://images.unsplash.com/photo-1741279278827-847b1c81746d?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI0MjY4fA&ixlib=rb-4.1.0',
           'ClimateActionPolicy RAG Application': 'https://plus.unsplash.com/premium_photo-1679350861722-97878a0a6313?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODU5fA&ixlib=rb-4.1.0',
@@ -2367,6 +2663,45 @@
         };
 
         function initializeProjectCards(cards) {
+          function formatProjectTag(tag) {
+            return projectTagLabels[tag] || tag.replace(/-/g, ' ').replace(/\b\w/g, function (character) {
+              return character.toUpperCase();
+            });
+          }
+
+          function findProjectSummary(beforeLinkNodes, detailNodes) {
+            const summaryNode = beforeLinkNodes.find((node) => {
+              return node.tagName === 'P' && !(node.classList && node.classList.contains('skill-button'));
+            });
+
+            if (summaryNode) {
+              return {
+                text: summaryNode.textContent.trim(),
+                consumedNode: summaryNode
+              };
+            }
+
+            const firstList = detailNodes.find((node) => {
+              return node.tagName === 'UL';
+            });
+
+            if (firstList) {
+              const firstItem = firstList.querySelector('li');
+
+              if (firstItem) {
+                return {
+                  text: firstItem.textContent.trim(),
+                  consumedNode: null
+                };
+              }
+            }
+
+            return {
+              text: '',
+              consumedNode: null
+            };
+          }
+
           function deriveProjectBackgroundUrl(card) {
             const title = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
             if (title && projectBackgroundsByTitle[title]) {
@@ -2411,9 +2746,9 @@
             const linkIndex = directChildren.indexOf(linkBlock);
             const beforeLinkNodes = directChildren.slice(headerIndex + 1, linkIndex);
             const afterLinkNodes = directChildren.slice(linkIndex + 1);
-            const detailNodes = beforeLinkNodes.concat(afterLinkNodes).filter(Boolean);
+            const combinedDetailNodes = beforeLinkNodes.concat(afterLinkNodes).filter(Boolean);
 
-            if (!detailNodes.length) {
+            if (!combinedDetailNodes.length) {
               return;
             }
 
@@ -2427,8 +2762,16 @@
             }
 
             const toggleButton = document.createElement('button');
+            const mediaSection = document.createElement('div');
+            const badgeRow = document.createElement('div');
+            const bodySection = document.createElement('div');
             const detailsWrapper = document.createElement('div');
             const detailsId = 'project-details-' + index;
+            const tagList = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
+            const summaryInfo = findProjectSummary(beforeLinkNodes, combinedDetailNodes);
+            const detailNodes = combinedDetailNodes.filter((node) => {
+              return node !== summaryInfo.consumedNode;
+            });
 
             toggleButton.type = 'button';
             toggleButton.className = 'project-toggle';
@@ -2437,16 +2780,39 @@
             toggleButton.setAttribute('aria-label', 'Show project details');
             toggleButton.textContent = '+';
 
+            mediaSection.className = 'project-media';
+            badgeRow.className = 'project-badge-row';
+            bodySection.className = 'project-card-body';
             detailsWrapper.className = 'project-details';
             detailsWrapper.id = detailsId;
             detailsWrapper.hidden = true;
+
+            tagList.forEach((tag) => {
+              const badge = document.createElement('span');
+              badge.className = 'project-badge';
+              badge.textContent = formatProjectTag(tag);
+              badgeRow.appendChild(badge);
+            });
+
+            mediaSection.appendChild(badgeRow);
+            mediaSection.appendChild(toggleButton);
+            bodySection.appendChild(header);
+
+            if (summaryInfo.text) {
+              const summaryParagraph = document.createElement('p');
+              summaryParagraph.className = 'project-summary';
+              summaryParagraph.textContent = summaryInfo.text;
+              bodySection.appendChild(summaryParagraph);
+            }
+
+            bodySection.appendChild(linkBlock);
 
             detailNodes.forEach((node) => {
               detailsWrapper.appendChild(node);
             });
 
-            linkBlock.insertAdjacentElement('afterend', detailsWrapper);
-            card.appendChild(toggleButton);
+            bodySection.appendChild(detailsWrapper);
+            card.replaceChildren(mediaSection, bodySection);
 
             toggleButton.addEventListener('click', function () {
               const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
