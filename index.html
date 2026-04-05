@@ -472,14 +472,16 @@
         .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1.7rem 1.6rem;
-            padding-top: 0.4rem;
+            gap: 3.2rem 1.7rem;
+            padding-top: 2rem;
+            align-items: stretch;
         }
 
         .interest-card {
             --interest-color: var(--accent);
             position: relative;
-            padding: 4.4rem 1.4rem 1.5rem;
+            min-height: 168px;
+            padding: 5rem 1.4rem 1.7rem;
             background: #ffffff;
             text-align: center;
             border-bottom: 2px solid var(--interest-color);
@@ -533,10 +535,11 @@
             margin: 0;
             color: var(--heading);
             font-family: "Quicksand", Arial, sans-serif;
-            font-size: 1rem;
+            font-size: 0.98rem;
             font-weight: 700;
             letter-spacing: 0.04em;
             text-transform: uppercase;
+            line-height: 1.55;
         }
 
         .interest-card.color-1 {
@@ -566,30 +569,30 @@
         .portfolio-counters {
             position: relative;
             margin: 0 0 5rem;
-            padding: 3rem 2.2rem;
-            background:
-                linear-gradient(135deg, rgba(17, 53, 87, 0.92), rgba(44, 152, 240, 0.88)),
-                radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.16), transparent 30%);
+            padding: 3.4rem 2.4rem;
+            background-color: #d6dde6;
+            background-image: url("assets/asu-tempe-campus.jpg");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             overflow: hidden;
         }
 
         .portfolio-counters::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.12);
+            display: none;
         }
 
         .counter-grid {
             position: relative;
             z-index: 1;
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 1.2rem;
         }
 
         .counter-item {
             text-align: center;
+            padding: 0.2rem 0.4rem;
         }
 
         .counter-number {
@@ -600,6 +603,7 @@
             font-size: 2.55rem;
             font-weight: 700;
             line-height: 1;
+            text-shadow: 0 4px 22px rgba(0, 0, 0, 0.35);
         }
 
         .counter-label {
@@ -883,6 +887,10 @@
             .interests-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+
+            .counter-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 767px) {
@@ -946,6 +954,7 @@
 
             .portfolio-counters {
                 padding: 2.2rem 1.4rem;
+                background-attachment: scroll, scroll, scroll;
             }
 
             .timeline-stack {
@@ -1125,23 +1134,6 @@
             </div>
         </section>
 
-        <div class="portfolio-counters reveal" aria-label="Portfolio highlights">
-            <div class="counter-grid">
-                <div class="counter-item">
-                    <span class="counter-number" data-counter-target="16">16</span>
-                    <span class="counter-label">Projects</span>
-                </div>
-                <div class="counter-item">
-                    <span class="counter-number" data-counter-target="2">2</span>
-                    <span class="counter-label">Publications</span>
-                </div>
-                <div class="counter-item">
-                    <span class="counter-number" data-counter-target="10">10</span>
-                    <span class="counter-label">Certifications</span>
-                </div>
-            </div>
-        </div>
-
         <section id="education" class="panel reveal">
             <div class="panel-header">
                 <h2>Education</h2>
@@ -1250,6 +1242,27 @@
                 </div>
             </div>
         </section>
+
+        <div class="portfolio-counters reveal" aria-label="Portfolio highlights">
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="16">16</span>
+                    <span class="counter-label">Projects</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="2">2</span>
+                    <span class="counter-label">Publications</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="10">10</span>
+                    <span class="counter-label">Certifications</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="2">2</span>
+                    <span class="counter-label">Blogs</span>
+                </div>
+            </div>
+        </div>
 
             <section id="projects" class="panel reveal">
             <div class="panel-header">
