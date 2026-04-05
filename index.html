@@ -2298,45 +2298,26 @@
         const projectEmpty = document.getElementById('projectEmpty');
 
         function initializeProjectCards(cards) {
-          function deriveProjectBackgroundUrl(card, index) {
-            const titleText = (card.querySelector('h3') && card.querySelector('h3').textContent || 'Project').trim();
-            const metaText = (card.querySelector('.project-meta') && card.querySelector('.project-meta').textContent || '').trim();
-            const tags = (card.dataset.tags || '').split(/\s+/).filter(Boolean);
-            const paletteMap = {
-              ai: ['#eaf4ff', '#d8e9ff', '#2c98f0'],
-              fullstack: ['#fff3ea', '#ffe3cf', '#ec7b3c'],
-              cloud: ['#eef8f4', '#d8efe6', '#2fa499']
-            };
-            const defaultPalette = ['#f2f5fb', '#e2e7f2', '#63738f'];
-            const primaryTag = tags.find((tag) => paletteMap[tag]) || '';
-            const palette = paletteMap[primaryTag] || [defaultPalette[index % 3], defaultPalette[(index + 1) % 3], defaultPalette[2]];
-            const initials = titleText
-              .split(/[^A-Za-z0-9]+/)
-              .filter(Boolean)
-              .slice(0, 3)
-              .map((part) => part.charAt(0).toUpperCase())
-              .join('') || 'PR';
-            const metaLabel = metaText.split('|')[0].trim().slice(0, 44) || titleText;
-            const safeTitle = titleText.replace(/[&<>]/g, '');
-            const safeLabel = metaLabel.replace(/[&<>]/g, '');
-            const svg = `
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="${safeTitle}">
-                <defs>
-                  <linearGradient id="bg-${index}" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="${palette[0]}"/>
-                    <stop offset="100%" stop-color="${palette[1]}"/>
-                  </linearGradient>
-                </defs>
-                <rect width="1200" height="800" fill="url(#bg-${index})"/>
-                <circle cx="180" cy="160" r="120" fill="${palette[2]}" fill-opacity="0.10"/>
-                <circle cx="1020" cy="620" r="170" fill="${palette[2]}" fill-opacity="0.08"/>
-                <text x="72" y="170" font-family="Quicksand, Arial, sans-serif" font-size="42" font-weight="700" fill="${palette[2]}" fill-opacity="0.78">${safeTitle}</text>
-                <text x="72" y="230" font-family="Quicksand, Arial, sans-serif" font-size="24" letter-spacing="5" fill="${palette[2]}" fill-opacity="0.62">${safeLabel}</text>
-                <text x="72" y="690" font-family="Playfair Display, Georgia, serif" font-size="280" font-weight="700" fill="${palette[2]}" fill-opacity="0.10">${initials}</text>
-              </svg>
-            `.trim();
+          function deriveProjectBackgroundUrl(card) {
+            const codeLink = Array.from(card.querySelectorAll('a.link-button[href]')).find((link) => {
+              return /github\.com/i.test(link.href);
+            });
 
-            return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+            if (!codeLink) {
+              return '';
+            }
+
+            try {
+              const parts = new URL(codeLink.href).pathname.split('/').filter(Boolean);
+
+              if (parts.length < 2) {
+                return '';
+              }
+
+              return 'https://opengraph.githubassets.com/portfolio-card/' + parts[0] + '/' + parts[1];
+            } catch (error) {
+              return '';
+            }
           }
 
           cards.forEach((card, index) => {
@@ -2365,7 +2346,7 @@
             card.classList.add('project-collapsible');
             linkBlock.classList.add('project-links');
 
-            const backgroundUrl = deriveProjectBackgroundUrl(card, index);
+            const backgroundUrl = deriveProjectBackgroundUrl(card);
             if (backgroundUrl) {
               card.style.setProperty('--project-bg-image', 'url("' + backgroundUrl + '")');
               card.classList.add('has-project-bg');
