@@ -667,7 +667,7 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(242, 243, 247, 0.86), rgba(242, 243, 247, 0.9)),
+                linear-gradient(rgba(242, 243, 247, 0.26), rgba(242, 243, 247, 0.9)),
                 var(--project-bg-image);
             background-size: cover;
             background-position: center;
@@ -683,6 +683,28 @@
 
         .project-box.project-collapsible.is-open::before {
             opacity: 0;
+        }
+
+        .project-box.project-collapsible.has-project-bg:not(.is-open) .experience-header h3,
+        .project-box.project-collapsible.has-project-bg:not(.is-open) > h3 {
+            color: #111111;
+            font-weight: 700;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+        }
+
+        .project-box.project-collapsible.has-project-bg:not(.is-open) .project-meta,
+        .project-box.project-collapsible.has-project-bg:not(.is-open) .experience-header p {
+            color: #2b2b2b;
+            font-weight: 700;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+        }
+
+        .project-box.project-collapsible.has-project-bg:not(.is-open) .link-button {
+            border-color: rgba(17, 17, 17, 0.12);
+            color: #333333;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 8px 20px -16px rgba(0, 0, 0, 0.38);
         }
 
         .project-box.project-collapsible > *:not(.project-toggle) {
@@ -2325,9 +2347,32 @@
         const projectCards = Array.from(document.querySelectorAll('#projectList .project-box'));
         const projectStatus = document.getElementById('projectStatus');
         const projectEmpty = document.getElementById('projectEmpty');
+        const projectBackgroundsByTitle = {
+          'Interactive Portfolio': 'https://images.unsplash.com/photo-1741279278827-847b1c81746d?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI0MjY4fA&ixlib=rb-4.1.0',
+          'ClimateActionPolicy RAG Application': 'https://plus.unsplash.com/premium_photo-1679350861722-97878a0a6313?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODU5fA&ixlib=rb-4.1.0',
+          'Opioid Overdose Forecasting Data Visualizer': 'https://plus.unsplash.com/premium_photo-1723741345479-76c5c4877d59?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYwfA&ixlib=rb-4.1.0',
+          'Fake-Job-Detection': 'https://plus.unsplash.com/premium_photo-1770456522134-8859792a0077?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1NDcyfA&ixlib=rb-4.1.0',
+          'Distributed NoSQL Database System for an E-Commerce Platform': 'https://plus.unsplash.com/premium_photo-1742714811980-d483ed52a17d?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYwfA&ixlib=rb-4.1.0',
+          'User Identification, Authentication, and Interactions for Social Media Data Analytics using AI': 'https://images.unsplash.com/photo-1759215524600-7971d6a4dac0?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYxfA&ixlib=rb-4.1.0',
+          'Movie Review WebApp': 'https://images.unsplash.com/photo-1761502479994-3a5e07ec243e?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYxfA&ixlib=rb-4.1.0',
+          'LLM Response Aggregation Tool': 'https://plus.unsplash.com/premium_photo-1770554274092-79eb3759238f?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYyfA&ixlib=rb-4.1.0',
+          'Sentiment Analysis on Twitter Datasets (NLP)': 'https://plus.unsplash.com/premium_photo-1722945793825-e5ec3fc5c0fc?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYyfA&ixlib=rb-4.1.0',
+          'IoT Device Manager using Blockchain': 'https://plus.unsplash.com/premium_photo-1663100847813-ae424dcd2154?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYzfA&ixlib=rb-4.1.0',
+          'Forest Monitoring using Hyperspectral Imaging': 'https://plus.unsplash.com/premium_photo-1663950775001-6c667dcd8914?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODYzfA&ixlib=rb-4.1.0',
+          'Web Phishing Detection': 'https://plus.unsplash.com/premium_photo-1707184721827-cc79f3de0fe4?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODY0fA&ixlib=rb-4.1.0',
+          'Path Navigation using Deep Q Learning': 'https://plus.unsplash.com/premium_photo-1742883582063-a9baa6b555ff?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODY0fA&ixlib=rb-4.1.0',
+          'Tournament Manager': 'https://images.unsplash.com/photo-1661860628513-ec32d1160a8d?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODY1fA&ixlib=rb-4.1.0',
+          'Harmful Comments Classifier': 'https://plus.unsplash.com/premium_photo-1718641527614-8edd0ca13235?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDIzMjMzfA&ixlib=rb-4.1.0',
+          'EATERIO': 'https://plus.unsplash.com/premium_photo-1663100323428-4f1af6bee2ef?mark=https%3A%2F%2Fimages.unsplash.com%2Fopengraph%2Flogo.png&mark-w=64&mark-align=top%2Cleft&mark-pad=50&h=630&w=1200&crop=faces%2Cedges&blend-w=1&blend=000000&blend-mode=normal&blend-alpha=10&auto=format&fit=crop&q=60&ixid=M3wxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNzc1NDI1ODY1fA&ixlib=rb-4.1.0'
+        };
 
         function initializeProjectCards(cards) {
           function deriveProjectBackgroundUrl(card) {
+            const title = card.querySelector('h3') ? card.querySelector('h3').textContent.trim() : '';
+            if (title && projectBackgroundsByTitle[title]) {
+              return projectBackgroundsByTitle[title];
+            }
+
             const codeLink = Array.from(card.querySelectorAll('a.link-button[href]')).find((link) => {
               return /github\.com/i.test(link.href);
             });
