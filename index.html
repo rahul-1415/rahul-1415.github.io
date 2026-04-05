@@ -469,6 +469,148 @@
             gap: 1.6rem;
         }
 
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.7rem 1.6rem;
+            padding-top: 0.4rem;
+        }
+
+        .interest-card {
+            --interest-color: var(--accent);
+            position: relative;
+            padding: 4.4rem 1.4rem 1.5rem;
+            background: #ffffff;
+            text-align: center;
+            border-bottom: 2px solid var(--interest-color);
+            box-shadow: 0 14px 42px -18px rgba(0, 0, 0, 0.22);
+        }
+
+        .interest-card .interest-icon {
+            position: absolute;
+            left: 50%;
+            top: -20px;
+            width: 100px;
+            height: 50px;
+            display: grid;
+            place-items: center;
+            margin-left: -50px;
+            background: var(--interest-color);
+            color: #ffffff;
+        }
+
+        .interest-card .interest-icon::before,
+        .interest-card .interest-icon::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .interest-card .interest-icon::before {
+            top: -30px;
+            border-width: 0 50px 30px 50px;
+            border-color: transparent transparent var(--interest-color) transparent;
+        }
+
+        .interest-card .interest-icon::after {
+            bottom: -30px;
+            border-width: 30px 50px 0 50px;
+            border-color: var(--interest-color) transparent transparent transparent;
+        }
+
+        .interest-card .interest-icon i {
+            font-size: 1.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interest-card h3 {
+            margin: 0;
+            color: var(--heading);
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .interest-card.color-1 {
+            --interest-color: #2c98f0;
+        }
+
+        .interest-card.color-2 {
+            --interest-color: #ec5453;
+        }
+
+        .interest-card.color-3 {
+            --interest-color: #f9bf3f;
+        }
+
+        .interest-card.color-4 {
+            --interest-color: #a84cb8;
+        }
+
+        .interest-card.color-5 {
+            --interest-color: #2fa499;
+        }
+
+        .interest-card.color-6 {
+            --interest-color: #4054b2;
+        }
+
+        .portfolio-counters {
+            position: relative;
+            margin: 0 0 5rem;
+            padding: 3rem 2.2rem;
+            background:
+                linear-gradient(135deg, rgba(17, 53, 87, 0.92), rgba(44, 152, 240, 0.88)),
+                radial-gradient(circle at 18% 20%, rgba(255, 255, 255, 0.16), transparent 30%);
+            overflow: hidden;
+        }
+
+        .portfolio-counters::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.12);
+        }
+
+        .counter-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1.2rem;
+        }
+
+        .counter-item {
+            text-align: center;
+        }
+
+        .counter-number {
+            display: block;
+            margin-bottom: 0.45rem;
+            color: #ffffff;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 2.55rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .counter-label {
+            display: block;
+            color: rgba(255, 255, 255, 0.76);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+        }
+
         .project-box,
         .experience-box,
         .contact-widget-panel {
@@ -737,6 +879,10 @@
             .contact-grid {
                 grid-template-columns: 1fr;
             }
+
+            .interests-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
         }
 
         @media (max-width: 767px) {
@@ -793,6 +939,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .interests-grid,
+            .counter-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-counters {
+                padding: 2.2rem 1.4rem;
+            }
+
             .timeline-stack {
                 padding-left: 1.6rem;
             }
@@ -846,6 +1001,7 @@
                         <ul>
                             <li><a href="#home" class="is-active">Home</a></li>
                             <li><a href="#about">About</a></li>
+                            <li><a href="#interests">Interests</a></li>
                             <li><a href="#education">Education</a></li>
                             <li><a href="#experience">Experience</a></li>
                             <li><a href="#projects">Projects</a></li>
@@ -933,6 +1089,58 @@
                     <p>My core stack includes Python, FastAPI, Django, Flask, React.js, LangChain, Hugging Face, Scikit-learn, PostgreSQL, MongoDB, Docker, CI/CD, and AWS services such as EC2, RDS, S3, Glue, ECS, and CloudWatch. I am interested in shipping useful products at the intersection of AI systems, backend engineering, and applied analytics.</p>
                 </div>
             </section>
+
+        <section id="interests" class="panel reveal">
+            <div class="panel-header">
+                <p class="panel-kicker">Interests</p>
+                <h2>Interests</h2>
+            </div>
+            <div class="panel-content">
+                <div class="interests-grid">
+                    <article class="interest-card color-1">
+                        <span class="interest-icon"><i class="fas fa-lightbulb"></i></span>
+                        <h3>Problem Solving</h3>
+                    </article>
+                    <article class="interest-card color-3">
+                        <span class="interest-icon"><i class="fas fa-database"></i></span>
+                        <h3>Data Engineering</h3>
+                    </article>
+                    <article class="interest-card color-4">
+                        <span class="interest-icon"><i class="fas fa-cloud"></i></span>
+                        <h3>Cloud</h3>
+                    </article>
+                    <article class="interest-card color-2">
+                        <span class="interest-icon"><i class="fas fa-layer-group"></i></span>
+                        <h3>Full-Stack Development</h3>
+                    </article>
+                    <article class="interest-card color-5">
+                        <span class="interest-icon"><i class="fas fa-code"></i></span>
+                        <h3>Software Development</h3>
+                    </article>
+                    <article class="interest-card color-6">
+                        <span class="interest-icon"><i class="fas fa-brain"></i></span>
+                        <h3>AI Systems</h3>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <div class="portfolio-counters reveal" aria-label="Portfolio highlights">
+            <div class="counter-grid">
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="16">16</span>
+                    <span class="counter-label">Projects</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="2">2</span>
+                    <span class="counter-label">Publications</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" data-counter-target="10">10</span>
+                    <span class="counter-label">Certifications</span>
+                </div>
+            </div>
+        </div>
 
         <section id="education" class="panel reveal">
             <div class="panel-header">
