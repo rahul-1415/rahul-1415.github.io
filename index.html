@@ -486,6 +486,8 @@
             text-align: center;
             border-bottom: 2px solid var(--interest-color);
             box-shadow: 0 14px 42px -18px rgba(0, 0, 0, 0.22);
+            transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+            will-change: transform;
         }
 
         .interest-card .interest-icon {
@@ -499,6 +501,7 @@
             margin-left: -50px;
             background: var(--interest-color);
             color: #ffffff;
+            transition: transform 0.24s ease, filter 0.24s ease;
         }
 
         .interest-card .interest-icon::before,
@@ -529,6 +532,7 @@
             font-size: 1.9rem;
             position: relative;
             z-index: 1;
+            transition: transform 0.24s ease;
         }
 
         .interest-card h3 {
@@ -540,6 +544,31 @@
             letter-spacing: 0.04em;
             text-transform: uppercase;
             line-height: 1.55;
+            transition: color 0.24s ease;
+        }
+
+        .interest-card:hover,
+        .interest-card:focus-visible {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 24px 54px -22px rgba(0, 0, 0, 0.3);
+            background: #ffffff;
+            outline: none;
+        }
+
+        .interest-card:hover .interest-icon,
+        .interest-card:focus-visible .interest-icon {
+            transform: translateY(-8px) scale(1.04);
+            filter: saturate(1.05);
+        }
+
+        .interest-card:hover .interest-icon i,
+        .interest-card:focus-visible .interest-icon i {
+            transform: scale(1.08);
+        }
+
+        .interest-card:hover h3,
+        .interest-card:focus-visible h3 {
+            color: var(--interest-color);
         }
 
         .interest-card.color-1 {
