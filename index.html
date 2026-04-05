@@ -626,6 +626,48 @@
             display: none !important;
         }
 
+        .project-box.project-collapsible {
+            position: relative;
+            padding-right: 4.8rem;
+        }
+
+        .project-toggle {
+            position: absolute;
+            top: 1.35rem;
+            right: 1.35rem;
+            width: 2.15rem;
+            height: 2.15rem;
+            border: 1px solid var(--line);
+            background: #ffffff;
+            color: #676767;
+            font-family: "Quicksand", Arial, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1;
+            cursor: pointer;
+            transition: border-color 0.2s ease, color 0.2s ease;
+        }
+
+        .project-toggle:hover,
+        .project-toggle:focus-visible,
+        .project-box.is-open .project-toggle {
+            border-color: var(--accent);
+            color: var(--accent);
+            outline: none;
+        }
+
+        .project-links {
+            margin: 0 0 0.95rem;
+        }
+
+        .project-details {
+            margin-top: 0.2rem;
+        }
+
+        .project-details[hidden] {
+            display: none !important;
+        }
+
         .experience-header,
         .role-header {
             display: flex;
@@ -2224,6 +2266,70 @@
         const projectCards = Array.from(document.querySelectorAll('#projectList .project-box'));
         const projectStatus = document.getElementById('projectStatus');
         const projectEmpty = document.getElementById('projectEmpty');
+
+        function initializeProjectCards(cards) {
+          cards.forEach((card, index) => {
+            const directChildren = Array.from(card.children);
+            const header = directChildren.find((element) => {
+              return element.classList && element.classList.contains('experience-header');
+            });
+            const linkBlock = directChildren.find((element) => {
+              return element.tagName === 'P' && element.querySelector('.link-button');
+            });
+
+            if (!header || !linkBlock) {
+              return;
+            }
+
+            const headerIndex = directChildren.indexOf(header);
+            const linkIndex = directChildren.indexOf(linkBlock);
+            const beforeLinkNodes = directChildren.slice(headerIndex + 1, linkIndex);
+            const afterLinkNodes = directChildren.slice(linkIndex + 1);
+            const detailNodes = beforeLinkNodes.concat(afterLinkNodes).filter(Boolean);
+
+            if (!detailNodes.length) {
+              return;
+            }
+
+            card.classList.add('project-collapsible');
+            linkBlock.classList.add('project-links');
+
+            const toggleButton = document.createElement('button');
+            const detailsWrapper = document.createElement('div');
+            const detailsId = 'project-details-' + index;
+
+            toggleButton.type = 'button';
+            toggleButton.className = 'project-toggle';
+            toggleButton.setAttribute('aria-expanded', 'false');
+            toggleButton.setAttribute('aria-controls', detailsId);
+            toggleButton.setAttribute('aria-label', 'Show project details');
+            toggleButton.textContent = '+';
+
+            detailsWrapper.className = 'project-details';
+            detailsWrapper.id = detailsId;
+            detailsWrapper.hidden = true;
+
+            detailNodes.forEach((node) => {
+              detailsWrapper.appendChild(node);
+            });
+
+            linkBlock.insertAdjacentElement('afterend', detailsWrapper);
+            card.appendChild(toggleButton);
+
+            toggleButton.addEventListener('click', function () {
+              const isExpanded = toggleButton.getAttribute('aria-expanded') === 'true';
+              const nextExpanded = !isExpanded;
+
+              toggleButton.setAttribute('aria-expanded', String(nextExpanded));
+              toggleButton.setAttribute('aria-label', nextExpanded ? 'Hide project details' : 'Show project details');
+              toggleButton.textContent = nextExpanded ? '-' : '+';
+              detailsWrapper.hidden = !nextExpanded;
+              card.classList.toggle('is-open', nextExpanded);
+            });
+          });
+        }
+
+        initializeProjectCards(projectCards);
 
         function applyProjectFilter(filterValue) {
           let visibleCount = 0;
